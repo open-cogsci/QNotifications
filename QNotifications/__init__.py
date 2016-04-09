@@ -20,3 +20,6 @@ along with this module.>.
 # Do some base imports
 from QNotifications.QNotificationArea import QNotificationArea
 from QNotifications.QNotification import QNotification
+
+__version__ = "1.0.0"
+__author__ = "Daniel Schreij (dschreij@gmail.com)"

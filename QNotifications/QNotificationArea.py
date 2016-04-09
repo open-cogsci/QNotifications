@@ -33,6 +33,23 @@ __license__ = u"GPLv3"
 import os
 
 class QNotificationArea(QtWidgets.QWidget):
+
+	default_notification_styles = """
+	.QNotification #primary {
+		color: '#FFFFFF';
+		background-color: '#337AB7';
+		border-radius: 5px;
+		font-size: 15px;
+	}
+
+	.QNotification #success {
+		color: '#000000';
+		background-color: '#DFF0D8';
+		border-radius: 5px;
+		font-size: 15px;
+	}
+	"""
+
 	### OpenSesame events
 	def __init__(self, targetWidget, *args, **kwargs):
 		super(QNotificationArea, self).__init__(*args, **kwargs)
@@ -57,6 +74,8 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.entryEffect = None
 		self.entryEffectDuration = None
 
+		self.setStyleSheet(self.default_notification_styles)
+
 	def __delete_notification(self, notification=None):
 		notification.close()
 		self.layout().removeWidget(notification)
@@ -69,7 +88,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.entryEffectDuration = duration
 
 	# Events
-	@QtCore.pyqtSlot(str, str, int)
+	@QtCore.pyqtSlot('QString', 'QString', int)
 	def display(self, message, messagetype, timeout=0):
 		notification = QNotification(message, messagetype)
 		notification.closeClicked.connect(self.remove)

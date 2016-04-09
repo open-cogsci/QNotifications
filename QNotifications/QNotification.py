@@ -42,7 +42,7 @@ class QNotification(QtWidgets.QWidget):
 		self.category = category
 
 		# Set Object name for reference
-		self.setObjectName('QNotification')
+		# self.setObjectName(category)
 		self.setFixedHeight(40)
 		self.setLayout(QtWidgets.QHBoxLayout())
 		self.layout().setContentsMargins(0,0,0,0)
@@ -59,6 +59,7 @@ class QNotification(QtWidgets.QWidget):
 		# Create a button that can close notifications
 		close_button = QtWidgets.QPushButton("X")
 		close_button.setFixedWidth(20)
+		close_button.setFlat(True)
 		close_button.clicked.connect(self.closeClicked)
 
 		# Add everything together
@@ -67,7 +68,7 @@ class QNotification(QtWidgets.QWidget):
 		self.messageArea.layout().addWidget(close_button)
 
 		# Initialize some variables
-		self.setStyle(category)
+		# self.setStyle(category)
 		self.setVisible(False)
 
 		# Flag that is set if notification is being removed. This can be used to
