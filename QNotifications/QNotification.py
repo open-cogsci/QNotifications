@@ -24,7 +24,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from qtpy import QtWidgets, QtCore
+from qtpy import QtWidgets, QtGui, QtCore
 from QNotifications.abstractions import *
 
 __author__ = u"Daniel Schreij"
@@ -36,36 +36,47 @@ class QNotification(QtWidgets.QWidget):
 	closeClicked = QtCore.pyqtSignal()
 
 	def __init__(self, message, category, *args, **kwargs):
+		""" Constructor
+		create a notification
+
+		Parameters
+		----------
+		message : str
+			The message to show
+		category : str
+			The type of notification. Adheres to bootstrap standard 
+			classes which are [primary, success, info, warning, danger]
+		"""
 		super(QNotification, self).__init__(*args, **kwargs)
 		# Store instance variables
 		self.message = message
 		self.category = category
 
 		# Set Object name for reference
-		# self.setObjectName(category)
-		self.setFixedHeight(40)
+		self.setObjectName(category)
 		self.setLayout(QtWidgets.QHBoxLayout())
-		self.layout().setContentsMargins(0,0,0,0)
 
 		# Create a message area
-		self.messageArea = QtWidgets.QWidget(self)
-		self.messageArea.setObjectName(category)
-		self.layout().addWidget(self.messageArea)
+		#contents = QtWidgets.QWidget(self)
+		messageArea = QtWidgets.QHBoxLayout()
+		messageArea.setContentsMargins(0,0,0,0)
 
 		# Create the layout
-		self.messageArea.setLayout(QtWidgets.QHBoxLayout())
 		self.message_display = QtWidgets.QLabel()
+		self.message_display.setObjectName("message")
 
 		# Create a button that can close notifications
 		close_button = QtWidgets.QPushButton("X")
+		close_button.setObjectName("closeButton")
 		close_button.setFixedWidth(20)
 		close_button.setFlat(True)
 		close_button.clicked.connect(self.closeClicked)
 
 		# Add everything together
-		self.messageArea.layout().addWidget(self.message_display)
-		self.messageArea.layout().addStretch(1)
-		self.messageArea.layout().addWidget(close_button)
+		messageArea.addWidget(self.message_display)
+		messageArea.addStretch(1)
+		messageArea.addWidget(close_button)
+		self.layout().addLayout(messageArea)
 
 		# Initialize some variables
 		# self.setStyle(category)
@@ -80,6 +91,7 @@ class QNotification(QtWidgets.QWidget):
 		self.__init_graphic_effects()
 
 	def __init_graphic_effects(self):
+		""" Initializes graphic effects """
 		# Opacityeffect for fade in/out
 		self.opacityEffect = QtWidgets.QGraphicsOpacityEffect(self)
 
@@ -95,70 +107,78 @@ class QNotification(QtWidgets.QWidget):
 		self.fadeOutAnimation.setStartValue(1.0)
 		self.fadeOutAnimation.setEndValue(0.0)
 
-	def setStyle(self, category):
-		if category == "primary":
-			textcolor = "#FFFFFF"
-			bgcolor = '#337AB7'
-		elif category == "success":
-			textcolor = "#000000"
-			bgcolor = '#DFF0D8'
-		elif category == "info":
-			textcolor = "#000000"
-			bgcolor = '#D9EDF7'
-		elif category == "warning":
-			textcolor = "#000000"
-			bgcolor = '#FCF8E3'
-		elif category == "danger":
-			textcolor = "#000000"
-			bgcolor = '#F2DEDE'
-
-		self.setStyleSheet(
-			"""
-			color: {};
-			background-color: {};
-			border-radius: 5px;
-			font-size: 15px;
-			""".format(textcolor, bgcolor))
-
 	def display(self):
+		""" Display the notification """
 		self.message_display.setText(self.message)
 		self.show()
 
 	def close(self):
+		""" Close the notification """
 		super(QNotification,self).close()
 		self.deleteLater()
 
-	def fadeIn(self, duration=100):
+	def fadeIn(self, duration):
+		""" Fade in the notification
+	
+		Parameters
+		----------
+		duration : int
+			The desired duration of the animation
+		"""
 		self.setGraphicsEffect(self.opacityEffect)
 		self.fadeInAnimation.setDuration(duration)
 		self.display()
 		self.fadeInAnimation.start()
 
-	def fadeOut(self, finishedCallback, duration=500):
+	def fadeOut(self, finishedCallback, duration):
+		""" Fade out the notification 
+	
+		Parameters
+		----------
+		finishedCallback : callable
+			The function to call after the animation has finished (to for instance
+			clean up the notification)
+		duration : int
+			The desired duration of the animation
+		"""
 		self.setGraphicsEffect(self.opacityEffect)
 		self.fadeOutAnimation.setDuration(duration)
 		self.fadeOutAnimation.finished.connect(lambda: finishedCallback(self))
 		self.isBeingRemoved = True
 		self.fadeOutAnimation.start()
 
+	def paintEvent(self, pe):
+		""" redefinition of paintEvent, to make class QNotification available
+		in style sheets. Interal Qt function. Do not call directly. """
+		o = QtWidgets.QStyleOption()
+		o.initFrom(self)
+		p = QtGui.QPainter(self)
+		self.style().drawPrimitive(QtWidgets.QStyle.PE_Widget, o, p, self)
+
 	### Property attributes
 	@property
 	def message(self):
+		""" The currently set message to display """
 		return self._message
 
 	@message.setter
 	def message(self, value):
+		""" Sets the message to display """
 		self._message = value
 
 	@property
 	def category(self):
-	    return self._category
+		""" The currently set category of this notification """
+		return self._category
 
 	@category.setter
 	def category(self, value):
-		allowed_values = ['primary','success','info','warning','danger']
+		""" Sets the category of this notification. Should be one of 
+		[u'primary',u'success',u'info',u'warning',u'danger']
+		"""
+		allowed_values = [u'primary',u'success',u'info',u'warning',u'danger']
 		if not value in allowed_values:
-			raise ValueError(_('{} not a valid value. '
+			raise ValueError(_(u'{} not a valid value. '
 				'Should be one of').format(value, allowed_values))
 		self._category = value
 

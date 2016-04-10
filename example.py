@@ -23,7 +23,7 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
-from qtpy import QtWidgets, QtCore, QtGui
+from qtpy import QtWidgets, QtCore
 import QNotifications
 
 __author__ = u"Daniel Schreij"
@@ -72,12 +72,14 @@ class Example(QtCore.QObject):
 		notification_area = QNotifications.QNotificationArea(targetWidget)
 		self.notify.connect(notification_area.display)
 		notification_area.setEntryEffect('fadeIn')
+		notification_area.setExitEffect('fadeOut')
 		return notification_area
 
 	def __submit_message(self):
-		textvalue = self.message_textbox.text()
+		textvalue = self.message_textbox.text().strip()
 		typevalue = self.type_dropdown.currentText()
-		self.notify.emit(textvalue, typevalue, 5000)
+		if textvalue:
+			self.notify.emit(textvalue, typevalue, 5000)
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
