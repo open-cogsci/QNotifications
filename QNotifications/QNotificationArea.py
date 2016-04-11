@@ -203,7 +203,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	@QtCore.pyqtSlot()
 	def remove(self, notification = None):
-		""" Remove a notification
+		""" Removes a notification
 	
 		Parameters
 		----------
@@ -247,7 +247,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	def paintEvent(self, pe):
 		""" redefinition of paintEvent, to make class QNotificationArea available
-		in style sheets. Internal QT functions (do not call directly) """
+		in style sheets. Internal QT function (do not call directly) """
 		o = QtWidgets.QStyleOption()
 		o.initFrom(self)
 		p = QtGui.QPainter(self)
