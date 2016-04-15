@@ -95,9 +95,9 @@ class QNotificationArea(QtWidgets.QWidget):
 			(which have been set at app-level). If False, the default style sheets
 			stored at self.default_notification_styles will be loaded.
 		"""
+		useGlobalCSS = kwargs.pop(u'useGlobalCSS', False)
 		super(QNotificationArea, self).__init__(*args, **kwargs)
 		
-		useGlobalCSS = kwargs.pop(u'useGlobalCSS', False)
 		if not useGlobalCSS:
 			self.setStyleSheet(self.default_notification_styles)
 		
@@ -177,21 +177,21 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	# Events
 	@QtCore.pyqtSlot('QString', 'QString', int)
-	def display(self, message, messagetype, timeout=0):
+	def display(self, message, category, timeout=0):
 		""" Displays a notification 
 	
 		Parameters
 		----------
 		message : str
 			The message to display
-		messagetype : str
+		category : str
 			The type of notification that should be shown. Adheres to bootstrap
 			standards which are [primary, success, info, warning, danger]
 		timeout : int (default: 0)
 			The duration for which the notification should be shown. If 0 then
 			the notification will be shown indefinitely
 		"""
-		notification = QNotification(message, messagetype, self)
+		notification = QNotification(message, category, self)
 		notification.closeClicked.connect(self.remove)
 		self.layout().addWidget(notification)
 		# Check for entry effects
