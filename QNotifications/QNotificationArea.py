@@ -39,16 +39,21 @@ class QNotificationArea(QtWidgets.QWidget):
 	default_notification_styles = u"""
 	QNotification {
 		font-size: 16px;
-		max-height:40px;
+		padding: 0px;
+		margin: 0px;
 		border-radius: 6px;
 	}
 
 	QNotification #message{
 		color: #FFFFFF;
+		padding: 0px;
+		margin: 0px;
 	}
 
 	QNotification #closeButton{
 		color: #FFFFFF;
+		padding: 0px;
+		margin: 0px;
 	}
 
 	QNotification#primary {

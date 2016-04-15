@@ -53,7 +53,7 @@ class Example(QtCore.QObject):
 		message_label = QtWidgets.QLabel("Send notification: ", display_widget)
 		self.message_textbox = QtWidgets.QLineEdit(display_widget)
 		# Notification type
-		type_label = QtWidgets.QLabel("Notifcation type: ", display_widget)
+		type_label = QtWidgets.QLabel("Notification type: ", display_widget)
 		self.type_dropdown = QtWidgets.QComboBox(display_widget)
 		self.type_dropdown.addItems(["primary", "success", "info", "warning", "danger"])
 		
