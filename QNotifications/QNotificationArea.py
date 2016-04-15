@@ -175,7 +175,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	# Events
 	@QtCore.pyqtSlot('QString', 'QString', int)
-	def display(self, message, category, timeout=0):
+	def display(self, message, category, timeout=5000):
 		""" Displays a notification 
 	
 		Parameters
@@ -185,8 +185,8 @@ class QNotificationArea(QtWidgets.QWidget):
 		category : str
 			The type of notification that should be shown. Adheres to bootstrap
 			standards which are [primary, success, info, warning, danger]
-		timeout : int (default: 0)
-			The duration for which the notification should be shown. If 0 then
+		timeout : int (default: 5000)
+			The duration for which the notification should be shown. If None then
 			the notification will be shown indefinitely
 		"""
 		notification = QNotification(message, category, self)
@@ -200,7 +200,7 @@ class QNotificationArea(QtWidgets.QWidget):
 			notification.display()
 
 		self.adjustSize()
-		if timeout > 0:
+		if not timeout is None and timeout > 0:
 			QtCore.QTimer.singleShot(timeout, 
 				lambda : self.remove(notification))
 

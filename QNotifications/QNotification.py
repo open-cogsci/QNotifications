@@ -64,6 +64,7 @@ class QNotification(QtWidgets.QWidget):
 		# Create the layout
 		self.message_display = QtWidgets.QLabel()
 		self.message_display.setObjectName("message")
+		self.message_display.setWordWrap(True)
 
 		# Create a button that can close notifications
 		close_button = QtWidgets.QPushButton(u"\u2715")
