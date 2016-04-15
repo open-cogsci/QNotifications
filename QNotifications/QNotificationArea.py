@@ -30,8 +30,6 @@ from QNotifications.abstractions import *
 __author__ = u"Daniel Schreij"
 __license__ = u"GPLv3"
 
-import os
-
 class QNotificationArea(QtWidgets.QWidget):
 	""" Notification area to show notifications in. Will be projected on top of
 	another QWidget which should be passed as an argument to this class. """
@@ -243,7 +241,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		else:
 			self.__delete_notification(notification)
 
-	# 
+	# Internal Qt functions
 	def resizeEvent(self, event):
 		""" Internal QT functions (do not call directly) """
 		self.old_target_resize_event(event)
