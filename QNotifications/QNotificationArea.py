@@ -46,6 +46,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		color: #FFFFFF;
 		padding: 0px;
 		margin: 0px;
+		width: 100%;
 	}
 
 	QNotification #closeButton{
@@ -115,7 +116,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 		# Store original target classes resizeEvent to be called in our own
 		# function
-		self.old_target_resize_event = targetWidget.resizeEvent
+		self.target_resize_event = targetWidget.resizeEvent
 		# Overwrite resizeEvent function of targetWidget to capture it ourself
 		# (parent's resizeEvent will be called in our function too)
 		self.targetWidget.resizeEvent = self.resizeEvent
@@ -244,9 +245,10 @@ class QNotificationArea(QtWidgets.QWidget):
 	# Internal Qt functions
 	def resizeEvent(self, event):
 		""" Internal QT functions (do not call directly) """
-		self.old_target_resize_event(event)
+		self.target_resize_event(event)
 		newsize = event.size()		
 		self.setFixedWidth(newsize.width())
+		self.adjustSize()
 
 	def paintEvent(self, pe):
 		""" redefinition of paintEvent, to make class QNotificationArea available

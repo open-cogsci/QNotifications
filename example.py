@@ -61,7 +61,7 @@ class Example(QtCore.QObject):
 		duration_label = QtWidgets.QLabel("Display duration: (ms)", display_widget)
 		self.message_duration = QtWidgets.QSpinBox(display_widget)
 		self.message_duration.setRange(500, 5000)
-		self.message_duration.setValue(2000)
+		self.message_duration.setValue(5000)
 		self.message_duration.setSingleStep(50)
 		# Entry effect
 		entryeffect_label = QtWidgets.QLabel("Entry effect: ", display_widget)
@@ -114,7 +114,6 @@ class Example(QtCore.QObject):
 		return notification_area
 
 	def __process_combo_change(self, val):
-		new_selection = val
 		if self.sender() == self.entry_dropdown:
 			if val == "None":
 				self.entryduration_label.setDisabled(True)
@@ -164,7 +163,3 @@ if __name__ == "__main__":
 	print("App exiting with code {}".format(exitcode))
 	del(example)
 	sys.exit(exitcode)
-
-
-
-

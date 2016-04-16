@@ -30,6 +30,19 @@ from QNotifications.abstractions import *
 __author__ = u"Daniel Schreij"
 __license__ = u"GPLv3"
 
+class MessageLabel(QtWidgets.QLabel):
+	""" Subclass of QLabel, which reimplements the resizeEvent() function. This
+	is necessary because otherwise the notifications take up too much vertical
+	space when texts they display become longer. This is because normally the height 
+	of a notification is calculated as the minimum height necessary for the text 
+	when the widget is horizontally resized to its minimum. """
+
+	def resizeEvent(self, event):
+		super(MessageLabel, self).resizeEvent(event)
+		if ( self.wordWrap() and \
+			self.sizePolicy().verticalPolicy() == QtWidgets.QSizePolicy.Minimum ):
+			self.setMaximumHeight( self.heightForWidth( self.width() ) )
+
 class QNotification(QtWidgets.QWidget):
 	""" Class representing a single notification """
 
@@ -55,6 +68,9 @@ class QNotification(QtWidgets.QWidget):
 		# Set Object name for reference
 		self.setObjectName(category)
 		self.setLayout(QtWidgets.QHBoxLayout())
+		self.setContentsMargins(0,0,0,0)
+		# self.setSizePolicy(QtWidgets.QSizePolicy.Minimum, 
+		# 	QtWidgets.QSizePolicy.Fixed)
 
 		# Create a message area
 		#contents = QtWidgets.QWidget(self)
@@ -62,8 +78,10 @@ class QNotification(QtWidgets.QWidget):
 		messageArea.setContentsMargins(0,0,0,0)
 
 		# Create the layout
-		self.message_display = QtWidgets.QLabel()
+		self.message_display = MessageLabel()
 		self.message_display.setObjectName("message")
+		self.message_display.setSizePolicy(QtWidgets.QSizePolicy.Minimum, 
+			QtWidgets.QSizePolicy.Minimum)
 		self.message_display.setWordWrap(True)
 
 		# Create a button that can close notifications
@@ -75,7 +93,7 @@ class QNotification(QtWidgets.QWidget):
 
 		# Add everything together
 		messageArea.addWidget(self.message_display)
-		messageArea.addStretch(1)
+		# messageArea.addStretch(1)
 		messageArea.addWidget(close_button)
 		self.layout().addLayout(messageArea)
 
