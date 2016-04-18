@@ -18,17 +18,17 @@ You should have received a copy of the GNU General Public License
 along with QNotifications.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-from setuptools import setup
+from setuptools import setup, find_packages
 import QNotifications
 
 setup(
-	name='QNotifications',
+	name='python-qnotifications',
 	version=QNotifications.__version__,
 	description='Pretty in-app notifications for PyQt',
 	author='Daniel Schreij',
 	author_email='dschreij@gmail.com',
 	url='https://github.com/dschreij/QNotifications',
-	py_modules=['QNotifications'],
+	packages=find_packages('.'),
 	classifiers=[
 		'Intended Audience :: Developers',
 		'Topic :: Desktop Environment',
