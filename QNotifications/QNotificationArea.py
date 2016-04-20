@@ -106,7 +106,6 @@ class QNotificationArea(QtWidgets.QWidget):
 		
 		notification_area_layout = QtWidgets.QVBoxLayout()
 		self.setLayout(notification_area_layout)
-		self.mapTo(targetWidget, QtCore.QPoint(0,0))
 
 		# Init effects to None
 		self.entryEffect = None
