@@ -86,3 +86,6 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Repository build and upload
+build_all
