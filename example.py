@@ -67,7 +67,10 @@ class Example(QtCore.QObject):
 		entryeffect_label = QtWidgets.QLabel("Entry effect: ", display_widget)
 		self.entry_dropdown = QtWidgets.QComboBox(display_widget)
 		self.entry_dropdown.addItems(["None","fadeIn"])
-		self.entry_dropdown.currentTextChanged.connect(self.__process_combo_change)
+		try:
+			self.entry_dropdown.currentTextChanged.connect(self.__process_combo_change)
+		except AttributeError: 
+			self.entry_dropdown.editTextChanged.connect(self.__process_combo_change)
 		# Entry effect duration
 		self.entryduration_label = QtWidgets.QLabel("Effect duration: (ms)", display_widget)
 		self.entryduration = QtWidgets.QSpinBox(display_widget)
@@ -77,7 +80,11 @@ class Example(QtCore.QObject):
 		exiteffect_label = QtWidgets.QLabel("Exit effect: ", display_widget)
 		self.exit_dropdown = QtWidgets.QComboBox(display_widget)
 		self.exit_dropdown.addItems(["None","fadeOut"])
-		self.exit_dropdown.currentTextChanged.connect(self.__process_combo_change)
+		# Qt5
+		try:
+			self.exit_dropdown.currentTextChanged.connect(self.__process_combo_change)
+		except AttributeError:
+			self.exit_dropdown.editTextChanged.connect(self.__process_combo_change)
 		# Exit effect duration
 		self.exitduration_label = QtWidgets.QLabel("Effect duration: (ms)", display_widget)
 		self.exitduration = QtWidgets.QSpinBox(display_widget)
