@@ -127,7 +127,6 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.layout().removeWidget(notification)
 		self.adjustSize()
 		# Hide notification area if it doesn't contain any items
-		print(self.layout().count())
 		if self.layout().count() == 0:
 			self.hide()
 
