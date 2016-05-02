@@ -197,7 +197,7 @@ class QNotification(QtWidgets.QWidget):
 		"""
 		allowed_values = [u'primary',u'success',u'info',u'warning',u'danger']
 		if not value in allowed_values:
-			raise ValueError(_(u'{} not a valid value. '
-				'Should be one of').format(value, allowed_values))
+			raise ValueError(u'{} not a valid value. '
+				'Should be one of').format(value, allowed_values)
 		self._category = value
 

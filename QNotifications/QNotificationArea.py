@@ -119,12 +119,17 @@ class QNotificationArea(QtWidgets.QWidget):
 		# Overwrite resizeEvent function of targetWidget to capture it ourself
 		# (parent's resizeEvent will be called in our function too)
 		self.targetWidget.resizeEvent = self.resizeEvent
+		self.hide()
 
 	def __delete_notification(self, notification=None):
 		""" Close and destroy the supplied notification """
 		notification.close()
 		self.layout().removeWidget(notification)
 		self.adjustSize()
+		# Hide notification area if it doesn't contain any items
+		print(self.layout().count())
+		if self.layout().count() == 0:
+			self.hide()
 
 	# Public functions
 	def setEntryEffect(self, effect, duration=250):
@@ -189,6 +194,7 @@ class QNotificationArea(QtWidgets.QWidget):
 			The duration for which the notification should be shown. If None then
 			the notification will be shown indefinitely
 		"""
+		self.show()
 		notification = QNotification(message, category, self)
 		notification.closeClicked.connect(self.remove)
 		self.layout().addWidget(notification)
