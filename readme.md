@@ -10,7 +10,23 @@ I designed this system with the [Gnome UI guidlines for in-app notifications](ht
 
 This project is still in the starting blocks and does not offer many options for customisation yet. Notifications are always positioned at the top of the target widget and take up the whole width (with a margin). The only currently supported animation style is fading (in and out), or not to use any animation at all. In the future, more options will be added, but for now I have just focussed on maximizing the stability of this module.
 
-## Dependencies
+## Installation
+
+QNotifications can easily be installed using pip
+
+    pip install python-qnotifications
+
+If you are using the Anaconda Python distribution (by which you will be doing yourself a big favor), the module is also available as a conda package in the cogsci channel on anaconda.org
+
+    conda install python-qnotifications -c cogsci
+
+Alternatively, you can just clone this repository and install it yourself
+
+    git clone https://github.com/dschreij/QNotifications
+    cd QNotifications
+    python setup.py install
+
+### Dependencies
 QNotifications of course heavily relies on PyQt and the abstraction layer qtpy, which makes it easier to write code that works PyQt4 and 5 at the same time, but that should be all you need to make it work.
 
 ## Example
