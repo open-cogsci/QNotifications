@@ -1,0 +1,367 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>QNotifications &mdash; QNotifications 1.0.5 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="QNotifications 1.0.5 documentation" href="index.html"/>
+        <link rel="prev" title="QNotifications documentation" href="index.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> QNotifications
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">QNotifications</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installation">Installation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#dependencies">Dependencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#example">Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#animations">Animations</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#signal-slot-capabilities">Signal/Slot capabilities</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#styling">Styling</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#api">API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">QNotifications</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>QNotifications</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/includeme.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="qnotifications">
+<h1>QNotifications<a class="headerlink" href="#qnotifications" title="Permalink to this headline">¶</a></h1>
+<img src="https://anaconda.org/cogsci/python-qnotifications/badges/installer/conda.svg" /><img src="https://anaconda.org/cogsci/python-qnotifications/badges/version.svg" /><img src="https://anaconda.org/cogsci/python-qnotifications/badges/license.svg" /><p>QNotifications brings pretty in-app notifications to PyQt. We are used to seeing such notifications in many web applications nowadays (as an example, see <a class="reference external" href="http://s-alert-demo.meteorapp.com">sAlert</a>), but functionality like this was still lacking in PyQt. QNotifications aims to provide a system that can display several types of notifications (info, errors, warnings, etc.) and can easily be plugged into existing PyQt projects. To integrate this module into existing applications just pass it a widget on which it should render the notifications.</p>
+<p>I designed this system with the <a class="reference external" href="https://developer.gnome.org/hig/stable/in-app-notifications.html.en">Gnome UI guidlines for in-app notifications</a> in mind.However, I do deviate from them at some points. For example, QNotifications currently allows multiple notifications to be displayed simultaneously (they will be stacked on top of each other), while best practice is to display multiple notifications sequentially but only one a the time. Additionally, QNotifications currently does not offer the possibility to display a button to undertake an action inside a notification.</p>
+<p>This project is still in the starting blocks and does not offer many options for customisation yet. Notifications are always positioned at the top of the target widget and take up the whole width (with a margin). The only currently supported animation style is fading (in and out), or not to use any animation at all. In the future, more options will be added, but for now I have just focussed on maximizing the stability of this module.</p>
+<div class="section" id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h2>
+<p>QNotifications can easily be installed using pip:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>pip install python-qnotifications
+</pre></div>
+</div>
+<p>If you are using the Anaconda Python distribution (by which you will be doing yourself a big favor), the module is also available as a conda package in the cogsci channel on anaconda.org:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>conda install python-qnotifications -c cogsci
+</pre></div>
+</div>
+<p>Alternatively, you can just clone this repository and install it yourself:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>git clone https://github.com/dschreij/QNotifications
+cd QNotifications
+python setup.py install
+</pre></div>
+</div>
+<div class="section" id="dependencies">
+<h3>Dependencies<a class="headerlink" href="#dependencies" title="Permalink to this headline">¶</a></h3>
+<p>QNotifications of course heavily relies on PyQt and the abstraction layer qtpy, which makes it easier to write code that works PyQt4 and 5 at the same time, but that should be all you need to make it work.</p>
+</div>
+</div>
+<div class="section" id="example">
+<h2>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h2>
+<p>The module comes with a ready to run example (pending that the dependencies are installed). To see what QNotifications has in store, simply run:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span>python example.py
+</pre></div>
+</div>
+<p>and play around with the interface which offers various possibilities to display notifications.</p>
+<img alt="screenshot.png" src="screenshot.png" />
+</div>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>To use QNotifications, you have to initialize the QNotificationArea first, which is a transparent widget in which the notifications are to be displayed. This widget is overlayed on top of another widget already embedded in your application. This embedded widget has to be passed to the constructor of QNotificationArea.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">qtpy</span> <span class="kn">import</span> <span class="n">QtWidgets</span><span class="p">,</span> <span class="n">QtCore</span>
+<span class="kn">from</span> <span class="nn">QNotifications</span> <span class="kn">import</span> <span class="n">QNotificationArea</span>
+
+<span class="c1"># Create a widget to render the notifications on.</span>
+<span class="n">targetWidget</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">()</span>
+<span class="n">targetWidget</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">800</span><span class="p">,</span><span class="mi">600</span><span class="p">)</span>
+<span class="c1"># Create a new notification area, and pass it the target widget.</span>
+<span class="n">qna</span> <span class="o">=</span> <span class="n">QNotificationArea</span><span class="p">(</span><span class="n">targetWidget</span><span class="p">)</span>
+<span class="c1"># Show the target widget.</span>
+<span class="n">targetWidget</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Show a &#39;primary&#39; styled notification for 1 second.</span>
+<span class="n">qna</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s1">&#39;This is a primary notification&#39;</span><span class="p">,</span> <span class="s1">&#39;primary&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># Show an &#39;info&#39; styled notification for 2 seconds.</span>
+<span class="n">qna</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s1">&#39;This is an info notification&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="c1"># Show a &#39;danger&#39; styled notification until the user closes it manually.</span>
+<span class="n">qna</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s1">&#39;This is an error notification&#39;</span><span class="p">,</span> <span class="s1">&#39;danger&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The message can contain (a limited set of) HTML tags, which will be rendered correctly when the message is displayed.</p>
+<div class="section" id="animations">
+<h3>Animations<a class="headerlink" href="#animations" title="Permalink to this headline">¶</a></h3>
+<p>To enable animations, you have to specify the animation style, for which at the moment the only the only options are &#8216;fadeIn&#8217;, &#8216;fadeOut&#8217; or None. All notifications will be displayed with that animation style from that moment on until a different animation style is specified.</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="c1"># Make the notifications fade in in 500 milliseconds.</span>
+<span class="n">qna</span><span class="o">.</span><span class="n">setEntryEffect</span><span class="p">(</span><span class="s1">&#39;fadeIn&#39;</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="c1"># Make the notifications fade out in 1 second.</span>
+<span class="n">qna</span><span class="o">.</span><span class="n">setExitEffect</span><span class="p">(</span><span class="s1">&#39;fadeOut&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># From now on, notifications will fade in in 500 ms and fade out in 1 second</span>
+
+<span class="c1"># Show a &#39;succes&#39; styled notification for 2 seconds.</span>
+<span class="n">qna</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s1">&#39;The thing you did succeeded!&#39;</span><span class="p">,</span> <span class="s1">&#39;success&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+<span class="c1"># Show a &#39;warning&#39; styled notification for 2 seconds.</span>
+<span class="n">qna</span><span class="o">.</span><span class="n">display</span><span class="p">(</span><span class="s1">&#39;Time to pay some attention&#39;</span><span class="p">,</span> <span class="s1">&#39;warning&#39;</span><span class="p">,</span> <span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="signal-slot-capabilities">
+<h3>Signal/Slot capabilities<a class="headerlink" href="#signal-slot-capabilities" title="Permalink to this headline">¶</a></h3>
+<p>The display() function of QNotificationArea also functions as a pyqt slot, expecting 3 arguments of type (str, str, int), corresponding to the contents of the message, its type, and the duration with which to display it. If one for instance would define a signal in an object that inherits from QtCore.QObject, the following is possible:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Example</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">):</span>
+    <span class="n">notify</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">pyqtSignal</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span><span class="nb">str</span><span class="p">,</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1">### Do some object initializations here where you also</span>
+        <span class="c1">### create a QNotificationArea.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">qna</span><span class="o">.</span><span class="n">display</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notify</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="s2">&quot;Object initialized&quot;</span><span class="p">,</span><span class="s2">&quot;info&quot;</span><span class="p">,</span><span class="mi">2000</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A notification can then be displayed from anywhere by just emitting the objects <em>notify</em> signal with the desired parameters.</p>
+</div>
+<div class="section" id="styling">
+<h3>Styling<a class="headerlink" href="#styling" title="Permalink to this headline">¶</a></h3>
+<p>QNotifications has been built in such a way that the appearance of its elements can be directly altered using QSS (which is Qt&#8217;s variant of CSS). When not explicitly instructed to do otherwise, QNotifications will use the default styles, which are based on [bootstrap&#8217;s](<a class="reference external" href="http://getbootstrap.com">http://getbootstrap.com</a>) color coding principles. The standard styles are as follows</p>
+<div class="highlight-css"><div class="highlight"><pre><span></span><span class="nt">QNotification</span> <span class="p">{</span>
+    <span class="nb">font-size</span><span class="o">:</span> <span class="m">16px</span><span class="p">;</span>
+    <span class="nb">padding</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+    <span class="nb">margin</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+    <span class="nb">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">6px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">QNotification</span> <span class="nn">#message</span><span class="p">{</span>
+    <span class="nb">color</span><span class="o">:</span> <span class="m">#FFFFFF</span><span class="p">;</span>
+    <span class="nb">padding</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+    <span class="nb">margin</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+    <span class="nb">width</span><span class="o">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">QNotification</span> <span class="nn">#closeButton</span><span class="p">{</span>
+    <span class="nb">color</span><span class="o">:</span> <span class="m">#FFFFFF</span><span class="p">;</span>
+    <span class="nb">padding</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+    <span class="nb">margin</span><span class="o">:</span> <span class="m">0px</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">QNotification</span> <span class="nn">#primary</span> <span class="p">{</span>
+    <span class="nb">background-color</span><span class="o">:</span> <span class="m">#337ab7</span><span class="p">;</span>
+    <span class="nb">border-color</span><span class="o">:</span> <span class="m">#2e6da4</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">QNotification</span> <span class="nn">#success</span> <span class="p">{</span>
+    <span class="nb">background-color</span><span class="o">:</span> <span class="m">#5cb85c</span><span class="p">;</span>
+    <span class="nb">border-color</span><span class="o">:</span> <span class="m">#4cae4c</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">QNotification</span> <span class="nn">#info</span> <span class="p">{</span>
+    <span class="nb">background-color</span><span class="o">:</span> <span class="m">#5bc0de</span><span class="p">;</span>
+    <span class="nb">border-color</span><span class="o">:</span> <span class="m">#46b8da</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">QNotification</span> <span class="nn">#warning</span> <span class="p">{</span>
+    <span class="nb">background-color</span><span class="o">:</span> <span class="m">#f0ad4e</span><span class="p">;</span>
+    <span class="nb">border-color</span><span class="o">:</span> <span class="m">#eea236</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nt">QNotification</span> <span class="nn">#danger</span> <span class="p">{</span>
+    <span class="nb">background-color</span><span class="o">:</span> <span class="m">#d9534f</span><span class="p">;</span>
+    <span class="nb">border-color</span><span class="o">:</span> <span class="m">#d43f3a</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To use a different (most of the time globally defined) style sheet, pass the useGlobalCSS flag to QNotificationArea when you initialize it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span></span><span class="n">qna</span> <span class="o">=</span> <span class="n">QNotificationArea</span><span class="p">(</span><span class="n">targetWidget</span><span class="p">,</span> <span class="n">useGlobalCSS</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Pay attention though, that if you pass this flag and you don&#8217;t have any entries for the QNotification items in your qss files, they will have no styling at all.</p>
+</div>
+</div>
+<div class="section" id="api">
+<h2>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h2>
+<p>All classes and functions are documented using ReST, and as soon as I figure out how to extract those contents and pour it into a nice API documentation page, I will place it on readthedocs or pydata. For now, I hope the examples given here will suffice as a &#8216;usage manual&#8217;.</p>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>QNotifications is distributed under the terms of the GNU General Public License 3. The full license should be included in the file <em>copyright</em>, or can be obtained from:</p>
+<p><a class="reference external" href="http://www.gnu.org/licenses/gpl.txt">http://www.gnu.org/licenses/gpl.txt</a></p>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="QNotifications documentation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, Daniel Schreij.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.5',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
