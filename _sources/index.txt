@@ -6,6 +6,9 @@
 QNotifications documentation
 ==========================================
 
+This is the documentation that belongs to the project located at 
+`<https://github.com/dschreij/QNotifications/>`_.
+
 Contents:
 
 ..	toctree::
@@ -13,11 +16,4 @@ Contents:
 	
 	main
 	api
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
 
