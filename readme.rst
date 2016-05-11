@@ -46,7 +46,8 @@ Usage
 -----
 
 To use QNotifications, you have to initialize the QNotificationArea first, which is a transparent widget in which the notifications are to be displayed. This widget is overlayed on top of another widget already embedded in your application. This embedded widget has to be passed to the constructor of QNotificationArea.
-::
+
+.. code-block:: python
 
     from qtpy import QtWidgets, QtCore
     from QNotifications import QNotificationArea
@@ -72,7 +73,8 @@ Animations
 ~~~~~~~~~~
 
 To enable animations, you have to specify the animation style, for which at the moment the only the only options are 'fadeIn', 'fadeOut' or None. All notifications will be displayed with that animation style from that moment on until a different animation style is specified.
-::
+
+.. code-block:: python
 
     # Make the notifications fade in in 500 milliseconds.
     qna.setEntryEffect('fadeIn', 500)
@@ -90,7 +92,8 @@ Signal/Slot capabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 The display() function of QNotificationArea also functions as a pyqt slot, expecting 3 arguments of type (str, str, int), corresponding to the contents of the message, its type, and the duration with which to display it. If one for instance would define a signal in an object that inherits from QtCore.QObject, the following is possible:
-::
+
+.. code-block:: python
 
     class Example(QtCore.QObject):
         notify = QtCore.pyqtSignal(str,str,int)
@@ -157,7 +160,9 @@ QNotifications has been built in such a way that the appearance of its elements 
     }
 
 
-To use a different (most of the time globally defined) style sheet, pass the useGlobalCSS flag to QNotificationArea when you initialize it::
+To use a different (most of the time globally defined) style sheet, pass the useGlobalCSS flag to QNotificationArea when you initialize it
+
+.. code-block:: python
 
     qna = QNotificationArea(targetWidget, useGlobalCSS=True)
 
