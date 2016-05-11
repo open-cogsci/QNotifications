@@ -20,6 +20,8 @@ The module comes with a ready to run example (pending that the dependencies are 
 
 and play around with the interface which offers various possibilities to display notifications.
 
+![Example screenshot](screenshot.png)
+
 ## Usage
 
 To use QNotifications, you have to initialize the QNotificationArea first, which is a transparent widget in which the notifications are to be displayed. This widget is overlayed on top of another widget already embedded in your application. This embedded widget has to be passed to the constructor of QNotificationArea.
@@ -43,6 +45,8 @@ qna.display('This is an info notification', 'info', 2000)
 # Show a 'danger' styled notification until the user closes it manually.
 qna.display('This is an error notification', 'danger', None)
 ```
+
+The message can contain (a limited set of) HTML tags, which will be rendered correctly when the message is displayed.
 
 ### Animations
 
@@ -129,6 +133,14 @@ QNotifications has been built in such a way that the appearance of its elements 
         border-color: #d43f3a;
     }
 ```
+
+To use a different (most of the time globally defined) style sheet, pass the useGlobalCSS flag to QNotificationArea when you initialize it:
+
+```python
+qna = QNotificationArea(targetWidget, useGlobalCSS=True)
+```
+
+Pay attention though, that if you pass this flag and you don't have any entries for the QNotification items in your qss files, they will have no styling at all.
 
 ## API
 All classes and functions are documented using ReST, and as soon as I figure out how to extract those contents and pour it into a nice API documentation page, I will place it on readthedocs or pydata. For now, I hope the examples given here will suffice as a 'usage manual'.
