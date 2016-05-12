@@ -271,7 +271,15 @@
 <span class="sd">		----------</span>
 <span class="sd">		duration : int</span>
 <span class="sd">			The desired duration of the animation</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		TypeError</span>
+<span class="sd">			if duration is not an integer</span>
 <span class="sd">		&quot;&quot;&quot;</span>
+
+		<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;duration should be an integer&quot;</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacityEffect</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">fadeInAnimation</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
@@ -287,7 +295,18 @@
 <span class="sd">			clean up the notification)</span>
 <span class="sd">		duration : int</span>
 <span class="sd">			The desired duration of the animation</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		TypeError</span>
+<span class="sd">			if the wrong datatype is specified for any of the parameters.</span>
 <span class="sd">		&quot;&quot;&quot;</span>
+
+		<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">finishedCallback</span><span class="p">,</span> <span class="nb">callable</span><span class="p">):</span>
+			<span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;finishedCallback should be a callable&quot;</span><span class="p">)</span>
+		<span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+			<span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;duration should be an integer&quot;</span><span class="p">)</span>
+
 		<span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacityEffect</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">fadeOutAnimation</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">fadeOutAnimation</span><span class="o">.</span><span class="n">finished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">finishedCallback</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
@@ -320,10 +339,20 @@
 
 	<span class="nd">@category.setter</span>
 	<span class="k">def</span> <span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Sets the category of this notification. Should be one of </span>
-<span class="sd">		[u&#39;primary&#39;,u&#39;success&#39;,u&#39;info&#39;,u&#39;warning&#39;,u&#39;danger&#39;]</span>
+		<span class="sd">&quot;&quot;&quot; Sets the category of this notification. </span>
+
+<span class="sd">		Parameters</span>
+<span class="sd">		----------</span>
+<span class="sd">		value : {&#39;primary&#39;,&#39;success&#39;,&#39;info&#39;,&#39;warning&#39;,&#39;danger&#39;}</span>
+<span class="sd">			The category specification</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		ValueError</span>
+<span class="sd">			if the category is other than one of the expected values.</span>
 <span class="sd">		&quot;&quot;&quot;</span>
-		<span class="n">allowed_values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">u&#39;primary&#39;</span><span class="p">,</span><span class="s1">u&#39;success&#39;</span><span class="p">,</span><span class="s1">u&#39;info&#39;</span><span class="p">,</span><span class="s1">u&#39;warning&#39;</span><span class="p">,</span><span class="s1">u&#39;danger&#39;</span><span class="p">]</span>
+
+		<span class="n">allowed_values</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;primary&#39;</span><span class="p">,</span><span class="s1">&#39;success&#39;</span><span class="p">,</span><span class="s1">&#39;info&#39;</span><span class="p">,</span><span class="s1">&#39;warning&#39;</span><span class="p">,</span><span class="s1">&#39;danger&#39;</span><span class="p">]</span>
 		<span class="k">if</span> <span class="ow">not</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">allowed_values</span><span class="p">:</span>
 			<span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">u&#39;{} not a valid value. &#39;</span>
 				<span class="s1">&#39;Should be one of&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">allowed_values</span><span class="p">)</span>

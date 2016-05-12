@@ -222,7 +222,16 @@
 <span class="sd">			Flag which indicates whether global style sheets should be used</span>
 <span class="sd">			(which have been set at app-level). If False, the default style sheets</span>
 <span class="sd">			stored at self.default_notification_styles will be loaded.</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		TypeError : if targetWidget is not an object that inherits QWidget</span>
 <span class="sd">		&quot;&quot;&quot;</span>
+
+		<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">targetWidget</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
+			<span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;targetWidget is not a QWidget (or child of it&#39;</span><span class="p">)</span>
+
+
 		<span class="n">useGlobalCSS</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">u&#39;useGlobalCSS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
 		<span class="nb">super</span><span class="p">(</span><span class="n">QNotificationArea</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 		
@@ -266,11 +275,18 @@
 <span class="sd">		Parameters</span>
 <span class="sd">		----------</span>
 <span class="sd">		effect : {&#39;fadeIn&#39;, None}</span>
-<span class="sd">			the effect which should be used (for now only &#39;fadeIn&#39; is available)</span>
+<span class="sd">			The effect which should be used (for now only &#39;fadeIn&#39; is available)</span>
 <span class="sd">			if None is passed for this argument, no effect will be used and the</span>
 <span class="sd">			notifcations will just appear directly.</span>
 <span class="sd">		duration : int (default: 250 ms)</span>
 <span class="sd">			The duration of the effect in milliseconds</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		TypeError</span>
+<span class="sd">			If the object passed for duration is not an int</span>
+<span class="sd">		ValueError</span>
+<span class="sd">			When duration is less than 0, or effect has an invalid value</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 
 		<span class="k">if</span> <span class="ow">not</span> <span class="n">effect</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">u&#39;fadeIn&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">]:</span>
@@ -294,6 +310,13 @@
 <span class="sd">			notifcations will just appear directly.</span>
 <span class="sd">		duration : int (default: 1000 ms)</span>
 <span class="sd">			The duration of the effect in milliseconds</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		TypeError</span>
+<span class="sd">			If the object passed for duration is not an int</span>
+<span class="sd">		ValueError</span>
+<span class="sd">			When duration is less than 0, or effect has an invalid value</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 
 		<span class="k">if</span> <span class="ow">not</span> <span class="n">effect</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">u&#39;fadeOut&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">]:</span>
@@ -321,6 +344,11 @@
 <span class="sd">		timeout : int (default: 5000)</span>
 <span class="sd">			The duration for which the notification should be shown. If None then</span>
 <span class="sd">			the notification will be shown indefinitely</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		ValueError</span>
+<span class="sd">			if the category is other than one of the expected values.</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 
 		<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -349,6 +377,11 @@
 <span class="sd">			The notification to remove. This function also serves as a PyQt slot</span>
 <span class="sd">			for signals emitted from a QNotification. In this case, the QNotification</span>
 <span class="sd">			object is retrieved by using self.sender()</span>
+
+<span class="sd">		Raises</span>
+<span class="sd">		------</span>
+<span class="sd">		ValueError</span>
+<span class="sd">			If notification is not None or a QNotification</span>
 <span class="sd">		&quot;&quot;&quot;</span>
 		<span class="c1"># This function also functions as a pyqt slot. In that case, no</span>
 		<span class="c1"># notification argument is passed, but this is set as self.sender()</span>

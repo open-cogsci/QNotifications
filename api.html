@@ -149,11 +149,14 @@ another QWidget which should be passed as an argument to this class.</p>
 <div><p>The widget to project the notifications on</p>
 </div></blockquote>
 <p><strong>useGlobalCSS</strong> : bool (default: False)</p>
-<blockquote class="last">
+<blockquote>
 <div><p>Flag which indicates whether global style sheets should be used
 (which have been set at app-level). If False, the default style sheets
 stored at self.default_notification_styles will be loaded.</p>
 </div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>TypeError</strong> : if targetWidget is not an object that inherits QWidget</p>
 </td>
 </tr>
 </tbody>
@@ -176,9 +179,15 @@ stored at self.default_notification_styles will be loaded.</p>
 standards which are primary, success, info, warning and danger</p>
 </div></blockquote>
 <p><strong>timeout</strong> : int (default: 5000)</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The duration for which the notification should be shown. If None then
 the notification will be shown indefinitely</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
+<blockquote class="last">
+<div><p>if the category is other than one of the expected values.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -202,10 +211,16 @@ in style sheets. Internal QT function (do not call directly)</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>notification</strong> : QNotification (default: None)</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The notification to remove. This function also serves as a PyQt slot
 for signals emitted from a QNotification. In this case, the QNotification
 object is retrieved by using self.sender()</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ValueError</strong></p>
+<blockquote class="last">
+<div><p>If notification is not None or a QNotification</p>
 </div></blockquote>
 </td>
 </tr>
@@ -229,13 +244,23 @@ object is retrieved by using self.sender()</p>
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>effect</strong> : {&#8216;fadeIn&#8217;, None}</p>
 <blockquote>
-<div><p>the effect which should be used (for now only &#8216;fadeIn&#8217; is available)
+<div><p>The effect which should be used (for now only &#8216;fadeIn&#8217; is available)
 if None is passed for this argument, no effect will be used and the
 notifcations will just appear directly.</p>
 </div></blockquote>
 <p><strong>duration</strong> : int (default: 250 ms)</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The duration of the effect in milliseconds</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>TypeError</strong></p>
+<blockquote>
+<div><p>If the object passed for duration is not an int</p>
+</div></blockquote>
+<p><strong>ValueError</strong></p>
+<blockquote class="last">
+<div><p>When duration is less than 0, or effect has an invalid value</p>
 </div></blockquote>
 </td>
 </tr>
@@ -258,8 +283,18 @@ if None is passed for this argument, no effect will be used and the
 notifcations will just appear directly.</p>
 </div></blockquote>
 <p><strong>duration</strong> : int (default: 1000 ms)</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The duration of the effect in milliseconds</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>TypeError</strong></p>
+<blockquote>
+<div><p>If the object passed for duration is not an int</p>
+</div></blockquote>
+<p><strong>ValueError</strong></p>
+<blockquote class="last">
+<div><p>When duration is less than 0, or effect has an invalid value</p>
 </div></blockquote>
 </td>
 </tr>
@@ -320,8 +355,14 @@ classes which are {primary, success, info, warning, danger}</p>
 <col class="field-body" />
 <tbody valign="top">
 <tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>duration</strong> : int</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The desired duration of the animation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>TypeError</strong></p>
+<blockquote class="last">
+<div><p>if duration is not an integer</p>
 </div></blockquote>
 </td>
 </tr>
@@ -343,8 +384,14 @@ classes which are {primary, success, info, warning, danger}</p>
 clean up the notification)</p>
 </div></blockquote>
 <p><strong>duration</strong> : int</p>
-<blockquote class="last">
+<blockquote>
 <div><p>The desired duration of the animation</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>TypeError</strong></p>
+<blockquote class="last">
+<div><p>if the wrong datatype is specified for any of the parameters.</p>
 </div></blockquote>
 </td>
 </tr>
