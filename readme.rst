@@ -1,7 +1,7 @@
-QNotifications
-==============
 .. image:: https://anaconda.org/cogsci/python-qnotifications/badges/installer/conda.svg
-.. image:: https://anaconda.org/cogsci/python-qnotifications/badges/version.svg  
+
+.. image:: https://anaconda.org/cogsci/python-qnotifications/badges/version.svg
+
 .. image:: https://anaconda.org/cogsci/python-qnotifications/badges/license.svg
 
 QNotifications brings pretty in-app notifications to PyQt. We are used to seeing such notifications in many web applications nowadays (as an example, see `sAlert <http://s-alert-demo.meteorapp.com>`_), but functionality like this was still lacking in PyQt. QNotifications aims to provide a system that can display several types of notifications (info, errors, warnings, etc.) and can easily be plugged into existing PyQt projects. To integrate this module into existing applications just pass it a widget on which it should render the notifications.
@@ -167,10 +167,6 @@ To use a different (most of the time globally defined) style sheet, pass the use
     qna = QNotificationArea(targetWidget, useGlobalCSS=True)
 
 Pay attention though, that if you pass this flag and you don't have any entries for the QNotification items in your qss files, they will have no styling at all.
-
-API
----
-All classes and functions are documented using ReST, and as soon as I figure out how to extract those contents and pour it into a nice API documentation page, I will place it on readthedocs or pydata. For now, I hope the examples given here will suffice as a 'usage manual'.
 
 License
 -------

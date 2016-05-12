@@ -49,16 +49,14 @@ class QNotification(QtWidgets.QWidget):
 	closeClicked = QtCore.pyqtSignal()
 
 	def __init__(self, message, category, *args, **kwargs):
-		""" Constructor
-		create a notification
-
+		"""
 		Parameters
 		----------
 		message : str
 			The message to show
-		category : str
+		category : {'primary', 'success', 'info', 'warning', 'danger'}
 			The type of notification. Adheres to bootstrap standard 
-			classes which are [primary, success, info, warning, danger]
+			classes which are {primary, success, info, warning, danger}
 		"""
 		super(QNotification, self).__init__(*args, **kwargs)
 		# Store instance variables
@@ -127,30 +125,38 @@ class QNotification(QtWidgets.QWidget):
 		self.fadeOutAnimation.setEndValue(0.0)
 
 	def display(self):
-		""" Display the notification """
+		""" Displays the notification """
 		self.message_display.setText(self.message)
 		self.show()
 
 	def close(self):
-		""" Close the notification """
+		""" Closes the notification """
 		super(QNotification,self).close()
 		self.deleteLater()
 
 	def fadeIn(self, duration):
-		""" Fade in the notification
+		""" Fades in the notification
 	
 		Parameters
 		----------
 		duration : int
 			The desired duration of the animation
+
+		Raises
+		------
+		TypeError
+			if duration is not an integer
 		"""
+
+		if type(duration) != int:
+			raise TypeError("duration should be an integer")
 		self.setGraphicsEffect(self.opacityEffect)
 		self.fadeInAnimation.setDuration(duration)
 		self.display()
 		self.fadeInAnimation.start()
 
 	def fadeOut(self, finishedCallback, duration):
-		""" Fade out the notification 
+		""" Fades out the notification 
 	
 		Parameters
 		----------
@@ -159,7 +165,18 @@ class QNotification(QtWidgets.QWidget):
 			clean up the notification)
 		duration : int
 			The desired duration of the animation
+
+		Raises
+		------
+		TypeError
+			if the wrong datatype is specified for any of the parameters.
 		"""
+
+		if not isinstance(finishedCallback, callable):
+			raise TypeError("finishedCallback should be a callable")
+		if type(duration) != int:
+			raise TypeError("duration should be an integer")
+
 		self.setGraphicsEffect(self.opacityEffect)
 		self.fadeOutAnimation.setDuration(duration)
 		self.fadeOutAnimation.finished.connect(lambda: finishedCallback(self))
@@ -168,7 +185,7 @@ class QNotification(QtWidgets.QWidget):
 
 	def paintEvent(self, pe):
 		""" redefinition of paintEvent, to make class QNotification available
-		in style sheets. Interal Qt function. Do not call directly. """
+		in style sheets. Interal Qt function. Should not be called directly. """
 		o = QtWidgets.QStyleOption()
 		o.initFrom(self)
 		p = QtGui.QPainter(self)
@@ -192,10 +209,20 @@ class QNotification(QtWidgets.QWidget):
 
 	@category.setter
 	def category(self, value):
-		""" Sets the category of this notification. Should be one of 
-		[u'primary',u'success',u'info',u'warning',u'danger']
+		""" Sets the category of this notification. 
+
+		Parameters
+		----------
+		value : {'primary','success','info','warning','danger'}
+			The category specification
+
+		Raises
+		------
+		ValueError
+			if the category is other than one of the expected values.
 		"""
-		allowed_values = [u'primary',u'success',u'info',u'warning',u'danger']
+
+		allowed_values = ['primary','success','info','warning','danger']
 		if not value in allowed_values:
 			raise ValueError(u'{} not a valid value. '
 				'Should be one of').format(value, allowed_values)

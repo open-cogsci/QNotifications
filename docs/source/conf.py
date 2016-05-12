@@ -19,8 +19,11 @@ import os
 from recommonmark.parser import CommonMarkParser
 
 # Get the version from QNotifications
-sys.path.insert(0,"../..")
+sys.path.insert(0, os.path.abspath("../.."))
 import QNotifications
+
+# Import bootstrap theme
+# import sphinx_bootstrap_theme
 
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
@@ -38,7 +41,16 @@ import QNotifications
 extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.githubpages',
+    'sphinx.ext.autosummary',
+    'numpydoc'
 ]
+
+numpydoc_show_class_members = False
+numpydoc_show_inherited_class_members = False
+numpydoc_class_members_toctree = False
+autoclass_content = 'both'
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -102,9 +114,10 @@ exclude_patterns = ['_build']
 # If true, sectionauthor and moduleauthor directives will be shown in the
 # output. They are ignored by default.
 #show_authors = False
+intersphinx_mapping = {'python': ('https://docs.python.org/3', None)}
 
 # The name of the Pygments (syntax highlighting) style to use.
-pygments_style = 'sphinx'
+# pygments_style = 'monokai'
 
 # A list of ignored prefixes for module index sorting.
 #modindex_common_prefix = []
@@ -122,10 +135,16 @@ todo_include_todos = False
 # a list of builtin themes.
 html_theme = 'sphinx_rtd_theme'
 
+# Activate the theme.
+# html_theme = 'bootstrap'
+# html_theme_path = sphinx_bootstrap_theme.get_html_theme_path()
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
-#html_theme_options = {}
+# html_theme_options = {
+#	'bootswatch_theme': "spacelab"
+#}
 
 # Add any paths that contain custom themes here, relative to this directory.
 #html_theme_path = []

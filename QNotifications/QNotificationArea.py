@@ -84,16 +84,24 @@ class QNotificationArea(QtWidgets.QWidget):
 	### OpenSesame events
 	def __init__(self, targetWidget, *args, **kwargs):
 		"""
-
 		Parameters
 		----------
 		targetWidget : QtWidgets.QWidget
-			The widget to project the norifications on
+			The widget to project the notifications on
 		useGlobalCSS : bool (default: False)
 			Flag which indicates whether global style sheets should be used
 			(which have been set at app-level). If False, the default style sheets
 			stored at self.default_notification_styles will be loaded.
+
+		Raises
+		------
+		TypeError : if targetWidget is not an object that inherits QWidget
 		"""
+
+		if not isinstance(targetWidget, QtWidgets.QWidget):
+			raise TypeError('targetWidget is not a QWidget (or child of it')
+
+
 		useGlobalCSS = kwargs.pop(u'useGlobalCSS', False)
 		super(QNotificationArea, self).__init__(*args, **kwargs)
 		
@@ -122,7 +130,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.hide()
 
 	def __delete_notification(self, notification=None):
-		""" Close and destroy the supplied notification """
+		""" Closes and destroys the supplied notification """
 		notification.close()
 		self.layout().removeWidget(notification)
 		self.adjustSize()
@@ -132,16 +140,23 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	# Public functions
 	def setEntryEffect(self, effect, duration=250):
-		""" Set the effect with which the notifications are to appear 
+		""" Sets the effect with which the notifications are to appear 
 	
 		Parameters
 		----------
-		effect : str or None
-			the effect which should be used (for now only 'fadeIn' is available)
+		effect : {'fadeIn', None}
+			The effect which should be used (for now only 'fadeIn' is available)
 			if None is passed for this argument, no effect will be used and the
 			notifcations will just appear directly.
 		duration : int (default: 250 ms)
 			The duration of the effect in milliseconds
+
+		Raises
+		------
+		TypeError
+			If the object passed for duration is not an int
+		ValueError
+			When duration is less than 0, or effect has an invalid value
 		"""
 
 		if not effect in [u'fadeIn', None]:
@@ -155,16 +170,23 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.entryEffectDuration = duration
 
 	def setExitEffect(self, effect, duration=500):
-		""" Set the effect with which the notifications are to disappear 
+		""" Sets the effect with which the notifications are to disappear 
 	
 		Parameters
 		----------
-		effect : str or None
+		effect : {'fadeOut', None}
 			the effect which should be used (for now only 'fadeOut' is available)
 			if None is passed for this argument, no effect will be used and the
 			notifcations will just appear directly.
 		duration : int (default: 1000 ms)
 			The duration of the effect in milliseconds
+
+		Raises
+		------
+		TypeError
+			If the object passed for duration is not an int
+		ValueError
+			When duration is less than 0, or effect has an invalid value
 		"""
 
 		if not effect in [u'fadeOut', None]:
@@ -186,13 +208,19 @@ class QNotificationArea(QtWidgets.QWidget):
 		----------
 		message : str
 			The message to display
-		category : str
+		category : {'primary', 'success', 'info', 'warning', 'danger'}
 			The type of notification that should be shown. Adheres to bootstrap
-			standards which are [primary, success, info, warning, danger]
+			standards which are primary, success, info, warning and danger
 		timeout : int (default: 5000)
 			The duration for which the notification should be shown. If None then
 			the notification will be shown indefinitely
+
+		Raises
+		------
+		ValueError
+			if the category is other than one of the expected values.
 		"""
+
 		self.show()
 		notification = QNotification(message, category, self)
 		notification.closeClicked.connect(self.remove)
@@ -219,6 +247,11 @@ class QNotificationArea(QtWidgets.QWidget):
 			The notification to remove. This function also serves as a PyQt slot
 			for signals emitted from a QNotification. In this case, the QNotification
 			object is retrieved by using self.sender()
+
+		Raises
+		------
+		ValueError
+			If notification is not None or a QNotification
 		"""
 		# This function also functions as a pyqt slot. In that case, no
 		# notification argument is passed, but this is set as self.sender()
@@ -248,7 +281,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	# Internal Qt functions
 	def resizeEvent(self, event):
-		""" Internal QT functions (do not call directly) """
+		""" Internal QT function (do not call directly) """
 		self.target_resize_event(event)
 		newsize = event.size()		
 		self.setFixedWidth(newsize.width())
