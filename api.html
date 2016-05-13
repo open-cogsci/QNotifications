@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API &mdash; QNotifications 1.0.5 documentation</title>
+  <title>API Reference &mdash; QNotifications 1.0.6 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="QNotifications 1.0.5 documentation" href="index.html"/>
+    <link rel="top" title="QNotifications 1.0.6 documentation" href="index.html"/>
         <link rel="prev" title="Manual" href="main.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.5
+                1.0.6
               </div>
             
           
@@ -82,9 +82,9 @@
             
                 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="main.html">Manual</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#qnotificationarea">QNotificationArea</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#qnotification">QNotification</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-QNotifications.QNotificationArea">QNotificationArea</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-QNotifications.QNotification">QNotification</a></li>
 </ul>
 </li>
 </ul>
@@ -117,7 +117,7 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>API</li>
+    <li>API Reference</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -131,15 +131,47 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="api">
-<h1>API<a class="headerlink" href="#api" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="qnotificationarea">
-<h2>QNotificationArea<a class="headerlink" href="#qnotificationarea" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-QNotifications.QNotificationArea">
+<span id="qnotificationarea"></span><h2>QNotificationArea<a class="headerlink" href="#module-QNotifications.QNotificationArea" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="QNotifications.QNotificationArea">
-<em class="property">class </em><code class="descclassname">QNotifications.</code><code class="descname">QNotificationArea</code><span class="sig-paren">(</span><em>targetWidget</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea" title="Permalink to this definition">¶</a></dt>
-<dd><p>Notification area to show notifications in. Will be projected on top of
+<dt id="QNotifications.QNotificationArea.QNotificationArea">
+<em class="property">class </em><code class="descclassname">QNotifications.QNotificationArea.</code><code class="descname">QNotificationArea</code><span class="sig-paren">(</span><em>targetWidget</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<p>Notification area to show notifications in. Will be projected on top of
 another QWidget which should be passed as an argument to this class.</p>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.display" title="QNotifications.QNotificationArea.QNotificationArea.display"><code class="xref py py-obj docutils literal"><span class="pre">display</span></code></a>(message,&nbsp;category[,&nbsp;timeout])</td>
+<td>Displays a notification.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.paintEvent" title="QNotifications.QNotificationArea.QNotificationArea.paintEvent"><code class="xref py py-obj docutils literal"><span class="pre">paintEvent</span></code></a>(pe)</td>
+<td>Redefinition of paintEvent.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.remove" title="QNotifications.QNotificationArea.QNotificationArea.remove"><code class="xref py py-obj docutils literal"><span class="pre">remove</span></code></a>([notification])</td>
+<td>Removes a notification.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.resizeEvent" title="QNotifications.QNotificationArea.QNotificationArea.resizeEvent"><code class="xref py py-obj docutils literal"><span class="pre">resizeEvent</span></code></a>(event)</td>
+<td>Internal QT function (do not call directly).</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.setEntryEffect" title="QNotifications.QNotificationArea.QNotificationArea.setEntryEffect"><code class="xref py py-obj docutils literal"><span class="pre">setEntryEffect</span></code></a>(effect[,&nbsp;duration])</td>
+<td>Sets the effect with which the notifications are to appear.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.setExitEffect" title="QNotifications.QNotificationArea.QNotificationArea.setExitEffect"><code class="xref py py-obj docutils literal"><span class="pre">setExitEffect</span></code></a>(effect[,&nbsp;duration])</td>
+<td>Sets the effect with which the notifications are to disappear.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>targetWidget</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -161,10 +193,12 @@ stored at self.default_notification_styles will be loaded.</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
 <dl class="method">
-<dt id="QNotifications.QNotificationArea.display">
-<code class="descname">display</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>timeout=5000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.display" title="Permalink to this definition">¶</a></dt>
-<dd><p>Displays a notification</p>
+<dt id="QNotifications.QNotificationArea.QNotificationArea.display">
+<code class="descname">display</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>timeout=5000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a notification.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -196,16 +230,17 @@ the notification will be shown indefinitely</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotificationArea.paintEvent">
-<code class="descname">paintEvent</code><span class="sig-paren">(</span><em>pe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.paintEvent" title="Permalink to this definition">¶</a></dt>
-<dd><p>redefinition of paintEvent, to make class QNotificationArea available
-in style sheets. Internal QT function (do not call directly)</p>
+<dt id="QNotifications.QNotificationArea.QNotificationArea.paintEvent">
+<code class="descname">paintEvent</code><span class="sig-paren">(</span><em>pe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.paintEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Redefinition of paintEvent. 
+Makes class QNotificationArea available in style sheets. 
+Internal QT function (do not call directly)</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotificationArea.remove">
-<code class="descname">remove</code><span class="sig-paren">(</span><em>notification=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.remove" title="Permalink to this definition">¶</a></dt>
-<dd><p>Removes a notification</p>
+<dt id="QNotifications.QNotificationArea.QNotificationArea.remove">
+<code class="descname">remove</code><span class="sig-paren">(</span><em>notification=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a notification.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -229,15 +264,15 @@ object is retrieved by using self.sender()</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotificationArea.resizeEvent">
-<code class="descname">resizeEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.resizeEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.resizeEvent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Internal QT function (do not call directly)</p>
+<dt id="QNotifications.QNotificationArea.QNotificationArea.resizeEvent">
+<code class="descname">resizeEvent</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.resizeEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.resizeEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal QT function (do not call directly).</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotificationArea.setEntryEffect">
-<code class="descname">setEntryEffect</code><span class="sig-paren">(</span><em>effect</em>, <em>duration=250</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.setEntryEffect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.setEntryEffect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the effect with which the notifications are to appear</p>
+<dt id="QNotifications.QNotificationArea.QNotificationArea.setEntryEffect">
+<code class="descname">setEntryEffect</code><span class="sig-paren">(</span><em>effect</em>, <em>duration=250</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.setEntryEffect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.setEntryEffect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the effect with which the notifications are to appear.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -269,9 +304,9 @@ notifcations will just appear directly.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotificationArea.setExitEffect">
-<code class="descname">setExitEffect</code><span class="sig-paren">(</span><em>effect</em>, <em>duration=500</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.setExitEffect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.setExitEffect" title="Permalink to this definition">¶</a></dt>
-<dd><p>Sets the effect with which the notifications are to disappear</p>
+<dt id="QNotifications.QNotificationArea.QNotificationArea.setExitEffect">
+<code class="descname">setExitEffect</code><span class="sig-paren">(</span><em>effect</em>, <em>duration=500</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.setExitEffect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.setExitEffect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the effect with which the notifications are to disappear.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -305,12 +340,59 @@ notifcations will just appear directly.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="qnotification">
-<h2>QNotification<a class="headerlink" href="#qnotification" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-QNotifications.QNotification">
+<span id="qnotification"></span><h2>QNotification<a class="headerlink" href="#module-QNotifications.QNotification" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
-<dt id="QNotifications.QNotification">
-<em class="property">class </em><code class="descclassname">QNotifications.</code><code class="descname">QNotification</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class representing a single notification</p>
+<dt id="QNotifications.QNotification.QNotification">
+<em class="property">class </em><code class="descclassname">QNotifications.QNotification.</code><code class="descname">QNotification</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<p>Class representing a single notification</p>
+<p class="rubric">Attributes</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.category" title="QNotifications.QNotification.QNotification.category"><code class="xref py py-obj docutils literal"><span class="pre">category</span></code></a></td>
+<td>The currently set category of this notification.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.message" title="QNotifications.QNotification.QNotification.message"><code class="xref py py-obj docutils literal"><span class="pre">message</span></code></a></td>
+<td>The currently set message to display.</td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Methods</p>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.close" title="QNotifications.QNotification.QNotification.close"><code class="xref py py-obj docutils literal"><span class="pre">close</span></code></a>()</td>
+<td>Closes the notification.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.closeClicked" title="QNotifications.QNotification.QNotification.closeClicked"><code class="xref py py-obj docutils literal"><span class="pre">closeClicked</span></code></a></td>
+<td>PyQt signal for click on the notification&#8217;s close button.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.display" title="QNotifications.QNotification.QNotification.display"><code class="xref py py-obj docutils literal"><span class="pre">display</span></code></a>()</td>
+<td>Displays the notification.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.fadeIn" title="QNotifications.QNotification.QNotification.fadeIn"><code class="xref py py-obj docutils literal"><span class="pre">fadeIn</span></code></a>(duration)</td>
+<td>Fades in the notification.</td>
+</tr>
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.fadeOut" title="QNotifications.QNotification.QNotification.fadeOut"><code class="xref py py-obj docutils literal"><span class="pre">fadeOut</span></code></a>(finishedCallback,&nbsp;duration)</td>
+<td>Fades out the notification.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotification.QNotification.paintEvent" title="QNotifications.QNotification.QNotification.paintEvent"><code class="xref py py-obj docutils literal"><span class="pre">paintEvent</span></code></a>(pe)</td>
+<td>redefinition of paintEvent, do not call directly.</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="QNotifications.QNotification.QNotification.__init__">
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -328,28 +410,36 @@ classes which are {primary, success, info, warning, danger}</p>
 </tr>
 </tbody>
 </table>
+</dd></dl>
+
 <dl class="attribute">
-<dt id="QNotifications.QNotification.category">
-<code class="descname">category</code><a class="headerlink" href="#QNotifications.QNotification.category" title="Permalink to this definition">¶</a></dt>
-<dd><p>The currently set category of this notification</p>
+<dt id="QNotifications.QNotification.QNotification.category">
+<code class="descname">category</code><a class="headerlink" href="#QNotifications.QNotification.QNotification.category" title="Permalink to this definition">¶</a></dt>
+<dd><p>The currently set category of this notification.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotification.close">
-<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.close" title="Permalink to this definition">¶</a></dt>
-<dd><p>Closes the notification</p>
+<dt id="QNotifications.QNotification.QNotification.close">
+<code class="descname">close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes the notification.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="QNotifications.QNotification.QNotification.closeClicked">
+<code class="descname">closeClicked</code><a class="headerlink" href="#QNotifications.QNotification.QNotification.closeClicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>PyQt signal for click on the notification&#8217;s close button.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotification.display">
-<code class="descname">display</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.display" title="Permalink to this definition">¶</a></dt>
-<dd><p>Displays the notification</p>
+<dt id="QNotifications.QNotification.QNotification.display">
+<code class="descname">display</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the notification.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotification.fadeIn">
-<code class="descname">fadeIn</code><span class="sig-paren">(</span><em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.fadeIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.fadeIn" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fades in the notification</p>
+<dt id="QNotifications.QNotification.QNotification.fadeIn">
+<code class="descname">fadeIn</code><span class="sig-paren">(</span><em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.fadeIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.fadeIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fades in the notification.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -371,9 +461,9 @@ classes which are {primary, success, info, warning, danger}</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotification.fadeOut">
-<code class="descname">fadeOut</code><span class="sig-paren">(</span><em>finishedCallback</em>, <em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.fadeOut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.fadeOut" title="Permalink to this definition">¶</a></dt>
-<dd><p>Fades out the notification</p>
+<dt id="QNotifications.QNotification.QNotification.fadeOut">
+<code class="descname">fadeOut</code><span class="sig-paren">(</span><em>finishedCallback</em>, <em>duration</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.fadeOut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.fadeOut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fades out the notification.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -400,16 +490,17 @@ clean up the notification)</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="QNotifications.QNotification.message">
-<code class="descname">message</code><a class="headerlink" href="#QNotifications.QNotification.message" title="Permalink to this definition">¶</a></dt>
-<dd><p>The currently set message to display</p>
+<dt id="QNotifications.QNotification.QNotification.message">
+<code class="descname">message</code><a class="headerlink" href="#QNotifications.QNotification.QNotification.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>The currently set message to display.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="QNotifications.QNotification.paintEvent">
-<code class="descname">paintEvent</code><span class="sig-paren">(</span><em>pe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.paintEvent" title="Permalink to this definition">¶</a></dt>
-<dd><p>redefinition of paintEvent, to make class QNotification available
-in style sheets. Interal Qt function. Should not be called directly.</p>
+<dt id="QNotifications.QNotification.QNotification.paintEvent">
+<code class="descname">paintEvent</code><span class="sig-paren">(</span><em>pe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.paintEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>redefinition of paintEvent, do not call directly. 
+Makes class QNotification available in style sheets. Interal Qt function. 
+Should not be called directly.</p>
 </dd></dl>
 
 </dd></dl>
@@ -456,7 +547,7 @@ in style sheets. Interal Qt function. Should not be called directly.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.5',
+            VERSION:'1.0.6',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
