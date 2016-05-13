@@ -1,23 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-@author: Daniel Schreij
-
-This file is part of QNotifications.
-
-QNotifications is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-QNotifications is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GPLv3 License
-along with this module.>.
-"""
-
 # Python3 compatibility
 from __future__ import absolute_import
 from __future__ import division
@@ -47,9 +28,11 @@ class QNotification(QtWidgets.QWidget):
 	""" Class representing a single notification """
 
 	closeClicked = QtCore.pyqtSignal()
+	""" PyQt signal for click on the notification's close button. """
 
 	def __init__(self, message, category, *args, **kwargs):
-		"""
+		"""Constructor
+
 		Parameters
 		----------
 		message : str
@@ -108,7 +91,7 @@ class QNotification(QtWidgets.QWidget):
 		self.__init_graphic_effects()
 
 	def __init_graphic_effects(self):
-		""" Initializes graphic effects """
+		""" Initializes graphic effects. """
 		# Opacityeffect for fade in/out
 		self.opacityEffect = QtWidgets.QGraphicsOpacityEffect(self)
 
@@ -125,17 +108,17 @@ class QNotification(QtWidgets.QWidget):
 		self.fadeOutAnimation.setEndValue(0.0)
 
 	def display(self):
-		""" Displays the notification """
+		""" Displays the notification. """
 		self.message_display.setText(self.message)
 		self.show()
 
 	def close(self):
-		""" Closes the notification """
+		""" Closes the notification. """
 		super(QNotification,self).close()
 		self.deleteLater()
 
 	def fadeIn(self, duration):
-		""" Fades in the notification
+		""" Fades in the notification.
 	
 		Parameters
 		----------
@@ -156,7 +139,7 @@ class QNotification(QtWidgets.QWidget):
 		self.fadeInAnimation.start()
 
 	def fadeOut(self, finishedCallback, duration):
-		""" Fades out the notification 
+		""" Fades out the notification. 
 	
 		Parameters
 		----------
@@ -184,8 +167,9 @@ class QNotification(QtWidgets.QWidget):
 		self.fadeOutAnimation.start()
 
 	def paintEvent(self, pe):
-		""" redefinition of paintEvent, to make class QNotification available
-		in style sheets. Interal Qt function. Should not be called directly. """
+		""" redefinition of paintEvent, do not call directly. 
+		Makes class QNotification available in style sheets. Interal Qt function. 
+		Should not be called directly. """
 		o = QtWidgets.QStyleOption()
 		o.initFrom(self)
 		p = QtGui.QPainter(self)
@@ -194,17 +178,17 @@ class QNotification(QtWidgets.QWidget):
 	### Property attributes
 	@property
 	def message(self):
-		""" The currently set message to display """
+		""" The currently set message to display. """
 		return self._message
 
 	@message.setter
 	def message(self, value):
-		""" Sets the message to display """
+		""" Sets the message to display. """
 		self._message = value
 
 	@property
 	def category(self):
-		""" The currently set category of this notification """
+		""" The currently set category of this notification. """
 		return self._category
 
 	@category.setter

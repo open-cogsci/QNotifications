@@ -1,22 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-@author: Daniel Schreij
-
-This file is part of QNotifications.
-
-QNotifications is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-QNotifications is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GPLv3 License
-along with this module.>.
-"""
 # Python3 compatibility
 from __future__ import absolute_import
 from __future__ import division
@@ -83,7 +65,8 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	### OpenSesame events
 	def __init__(self, targetWidget, *args, **kwargs):
-		"""
+		"""Constructor
+
 		Parameters
 		----------
 		targetWidget : QtWidgets.QWidget
@@ -130,7 +113,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.hide()
 
 	def __delete_notification(self, notification=None):
-		""" Closes and destroys the supplied notification """
+		""" Closes and destroys the supplied notification. """
 		notification.close()
 		self.layout().removeWidget(notification)
 		self.adjustSize()
@@ -140,7 +123,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	# Public functions
 	def setEntryEffect(self, effect, duration=250):
-		""" Sets the effect with which the notifications are to appear 
+		""" Sets the effect with which the notifications are to appear. 
 	
 		Parameters
 		----------
@@ -170,7 +153,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.entryEffectDuration = duration
 
 	def setExitEffect(self, effect, duration=500):
-		""" Sets the effect with which the notifications are to disappear 
+		""" Sets the effect with which the notifications are to disappear. 
 	
 		Parameters
 		----------
@@ -202,7 +185,7 @@ class QNotificationArea(QtWidgets.QWidget):
 	# Events
 	@QtCore.pyqtSlot('QString', 'QString', int)
 	def display(self, message, category, timeout=5000):
-		""" Displays a notification 
+		""" Displays a notification. 
 	
 		Parameters
 		----------
@@ -239,7 +222,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	@QtCore.pyqtSlot()
 	def remove(self, notification = None):
-		""" Removes a notification
+		""" Removes a notification.
 	
 		Parameters
 		----------
@@ -281,15 +264,16 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	# Internal Qt functions
 	def resizeEvent(self, event):
-		""" Internal QT function (do not call directly) """
+		""" Internal QT function (do not call directly). """
 		self.target_resize_event(event)
 		newsize = event.size()		
 		self.setFixedWidth(newsize.width())
 		self.adjustSize()
 
 	def paintEvent(self, pe):
-		""" redefinition of paintEvent, to make class QNotificationArea available
-		in style sheets. Internal QT function (do not call directly) """
+		""" Redefinition of paintEvent. 
+		Makes class QNotificationArea available in style sheets. 
+		Internal QT function (do not call directly) """
 		o = QtWidgets.QStyleOption()
 		o.initFrom(self)
 		p = QtGui.QPainter(self)

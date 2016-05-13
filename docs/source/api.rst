@@ -1,15 +1,19 @@
-API
-===
+API Reference
+=============
 
 QNotificationArea
 -----------------
 
-.. autoclass:: QNotifications.QNotificationArea
-   :members:
+.. automodule:: QNotifications.QNotificationArea
+   :show-inheritance:
+   :special-members:
+   :members: QNotificationArea
 
 QNotification
 -------------
 
-.. autoclass:: QNotifications.QNotification
-   :members:
+.. automodule:: QNotifications.QNotification
+   :show-inheritance:
+   :special-members:
+   :members: QNotification
    
