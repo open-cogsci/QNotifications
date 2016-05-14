@@ -155,7 +155,7 @@ class QNotification(QtWidgets.QWidget):
 			if the wrong datatype is specified for any of the parameters.
 		"""
 
-		if not isinstance(finishedCallback, callable):
+		if not callable(finishedCallback):
 			raise TypeError("finishedCallback should be a callable")
 		if type(duration) != int:
 			raise TypeError("duration should be an integer")
