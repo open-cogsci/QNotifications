@@ -17,10 +17,9 @@ GNU General Public License for more details.
 You should have received a copy of the GPLv3 License
 along with this module.>.
 """
-__version__ = "1.0.7"
+__version__ = "1.0.8"
 __author__ = "Daniel Schreij (dschreij@gmail.com)"
 
 # Do some base imports
 from QNotifications.QNotificationArea import QNotificationArea
 from QNotifications.QNotification import QNotification
-

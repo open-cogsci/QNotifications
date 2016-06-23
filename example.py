@@ -33,7 +33,7 @@ import sys
 
 class Example(QtCore.QObject):
 	""" Example showing off the notifications """
-	notify = QtCore.pyqtSignal(str,str,int)
+	notify = QtCore.pyqtSignal(str,str,int,str)
 
 	def __init__(self):
 		super(Example,self).__init__()
@@ -56,7 +56,7 @@ class Example(QtCore.QObject):
 		type_label = QtWidgets.QLabel("Notification type: ", display_widget)
 		self.type_dropdown = QtWidgets.QComboBox(display_widget)
 		self.type_dropdown.addItems(["primary", "success", "info", "warning", "danger"])
-		
+
 		# Notification duration
 		duration_label = QtWidgets.QLabel("Display duration: (ms)", display_widget)
 		self.message_duration = QtWidgets.QSpinBox(display_widget)
@@ -69,14 +69,14 @@ class Example(QtCore.QObject):
 		self.entry_dropdown.addItems(["None","fadeIn"])
 		try:
 			self.entry_dropdown.currentTextChanged.connect(self.__process_combo_change)
-		except AttributeError: 
+		except AttributeError:
 			self.entry_dropdown.editTextChanged.connect(self.__process_combo_change)
 		# Entry effect duration
 		self.entryduration_label = QtWidgets.QLabel("Effect duration: (ms)", display_widget)
 		self.entryduration = QtWidgets.QSpinBox(display_widget)
 		self.entryduration.setRange(100, 1000)
 		self.entryduration.setSingleStep(50)
-		# Exit effect 
+		# Exit effect
 		exiteffect_label = QtWidgets.QLabel("Exit effect: ", display_widget)
 		self.exit_dropdown = QtWidgets.QComboBox(display_widget)
 		self.exit_dropdown.addItems(["None","fadeOut"])
@@ -144,7 +144,7 @@ class Example(QtCore.QObject):
 			entry_effect = self.entry_dropdown.currentText()
 			exit_effect = self.exit_dropdown.currentText()
 			if entry_effect != "None":
-				self.notification_area.setEntryEffect(entry_effect, 
+				self.notification_area.setEntryEffect(entry_effect,
 					self.entryduration.value())
 			else:
 				self.notification_area.setEntryEffect(None)
@@ -153,7 +153,7 @@ class Example(QtCore.QObject):
 					self.exitduration.value())
 			else:
 				self.notification_area.setExitEffect(None)
-			self.notify.emit(textvalue, typevalue, duration)
+			self.notify.emit(textvalue, typevalue, duration, None)
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
