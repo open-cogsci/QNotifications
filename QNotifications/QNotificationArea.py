@@ -87,14 +87,14 @@ class QNotificationArea(QtWidgets.QWidget):
 
 		useGlobalCSS = kwargs.pop(u'useGlobalCSS', False)
 		super(QNotificationArea, self).__init__(*args, **kwargs)
-		
+
 		if not useGlobalCSS:
 			self.setStyleSheet(self.default_notification_styles)
-		
+
 		self.setParent(targetWidget)
 		self.targetWidget = targetWidget
 		self.setContentsMargins(0,0,0,0)
-		
+
 		notification_area_layout = QtWidgets.QVBoxLayout()
 		self.setLayout(notification_area_layout)
 
@@ -123,8 +123,8 @@ class QNotificationArea(QtWidgets.QWidget):
 
 	# Public functions
 	def setEntryEffect(self, effect, duration=250):
-		""" Sets the effect with which the notifications are to appear. 
-	
+		""" Sets the effect with which the notifications are to appear.
+
 		Parameters
 		----------
 		effect : {'fadeIn', None}
@@ -153,8 +153,8 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.entryEffectDuration = duration
 
 	def setExitEffect(self, effect, duration=500):
-		""" Sets the effect with which the notifications are to disappear. 
-	
+		""" Sets the effect with which the notifications are to disappear.
+
 		Parameters
 		----------
 		effect : {'fadeOut', None}
@@ -183,10 +183,10 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.exitEffectDuration = duration
 
 	# Events
-	@QtCore.pyqtSlot('QString', 'QString', int)
-	def display(self, message, category, timeout=5000):
-		""" Displays a notification. 
-	
+	@QtCore.pyqtSlot('QString', 'QString', int, 'QString')
+	def display(self, message, category, timeout=5000, buttontext=None):
+		""" Displays a notification.
+
 		Parameters
 		----------
 		message : str
@@ -205,7 +205,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		"""
 
 		self.show()
-		notification = QNotification(message, category, self)
+		notification = QNotification(message, category, buttontext, self)
 		notification.closeClicked.connect(self.remove)
 		self.layout().addWidget(notification)
 		# Check for entry effects
@@ -217,13 +217,13 @@ class QNotificationArea(QtWidgets.QWidget):
 
 		self.adjustSize()
 		if not timeout is None and timeout > 0:
-			QtCore.QTimer.singleShot(timeout, 
+			QtCore.QTimer.singleShot(timeout,
 				lambda : self.remove(notification))
 
 	@QtCore.pyqtSlot()
 	def remove(self, notification = None):
 		""" Removes a notification.
-	
+
 		Parameters
 		----------
 		notification : QNotification (default: None)
@@ -266,17 +266,15 @@ class QNotificationArea(QtWidgets.QWidget):
 	def resizeEvent(self, event):
 		""" Internal QT function (do not call directly). """
 		self.target_resize_event(event)
-		newsize = event.size()		
+		newsize = event.size()
 		self.setFixedWidth(newsize.width())
 		self.adjustSize()
 
 	def paintEvent(self, pe):
-		""" Redefinition of paintEvent. 
-		Makes class QNotificationArea available in style sheets. 
+		""" Redefinition of paintEvent.
+		Makes class QNotificationArea available in style sheets.
 		Internal QT function (do not call directly) """
 		o = QtWidgets.QStyleOption()
 		o.initFrom(self)
 		p = QtGui.QPainter(self)
 		self.style().drawPrimitive(QtWidgets.QStyle.PE_Widget, o, p, self)
-	
-	
