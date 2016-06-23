@@ -33,7 +33,8 @@ import sys
 
 class Example(QtCore.QObject):
 	""" Example showing off the notifications """
-	notify = QtCore.pyqtSignal(str,str,int,str)
+	notify = QtCore.pyqtSignal(['QString', 'QString', int],
+		['QString', 'QString', int, 'QString'])
 
 	def __init__(self):
 		super(Example,self).__init__()
@@ -90,6 +91,10 @@ class Example(QtCore.QObject):
 		self.exitduration = QtWidgets.QSpinBox(display_widget)
 		self.exitduration.setRange(100, 1000)
 		self.exitduration.setSingleStep(50)
+
+		self.buttontext_label = QtWidgets.QLabel("Button text", display_widget)
+		self.buttontext_textbox = QtWidgets.QLineEdit(display_widget)
+
 		# Send button
 		send_button = QtWidgets.QPushButton("Send", display_widget)
 
@@ -100,6 +105,7 @@ class Example(QtCore.QObject):
 		inputLayout.addRow(self.entryduration_label, self.entryduration)
 		inputLayout.addRow(exiteffect_label, self.exit_dropdown)
 		inputLayout.addRow(self.exitduration_label, self.exitduration)
+		inputLayout.addRow(self.buttontext_label, self.buttontext_textbox)
 		inputLayout.addRow(QtWidgets.QWidget(), send_button)
 
 		self.entryduration_label.setDisabled(True)
@@ -112,12 +118,15 @@ class Example(QtCore.QObject):
 		display_widget.layout().addLayout(inputLayout)
 
 		self.message_textbox.returnPressed.connect(send_button.click)
+		self.buttontext_textbox.returnPressed.connect(send_button.click)
 		send_button.clicked.connect(self.__submit_message)
 		return display_widget
 
 	def __setup_notification_area(self, targetWidget):
 		notification_area = QNotifications.QNotificationArea(targetWidget)
-		self.notify.connect(notification_area.display)
+		self.notify['QString', 'QString', int].connect(notification_area.display)
+		self.notify['QString', 'QString', int, 'QString'].connect(
+			notification_area.display)
 		return notification_area
 
 	def __process_combo_change(self, val):
@@ -153,7 +162,13 @@ class Example(QtCore.QObject):
 					self.exitduration.value())
 			else:
 				self.notification_area.setExitEffect(None)
-			self.notify.emit(textvalue, typevalue, duration, None)
+
+			buttontext = self.buttontext_textbox.text().strip()
+			if buttontext:
+				self.notify['QString', 'QString', int, 'QString'].emit(
+					textvalue, typevalue, duration, buttontext)
+			else:
+				self.notify.emit(textvalue, typevalue, duration)
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)

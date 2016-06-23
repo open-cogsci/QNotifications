@@ -183,6 +183,7 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.exitEffectDuration = duration
 
 	# Events
+	@QtCore.pyqtSlot('QString', 'QString', int)
 	@QtCore.pyqtSlot('QString', 'QString', int, 'QString')
 	def display(self, message, category, timeout=5000, buttontext=None):
 		""" Displays a notification.
@@ -194,9 +195,12 @@ class QNotificationArea(QtWidgets.QWidget):
 		category : {'primary', 'success', 'info', 'warning', 'danger'}
 			The type of notification that should be shown. Adheres to bootstrap
 			standards which are primary, success, info, warning and danger
-		timeout : int (default: 5000)
+		timeout : int, optional
 			The duration for which the notification should be shown. If None then
 			the notification will be shown indefinitely
+		buttontext : str, optional
+			The text to display on the closing button. If not provided a cross
+			will be shown.
 
 		Raises
 		------
