@@ -22,7 +22,10 @@ class MessageLabel(QtWidgets.QLabel):
 		super(MessageLabel, self).resizeEvent(event)
 		if ( self.wordWrap() and \
 			self.sizePolicy().verticalPolicy() == QtWidgets.QSizePolicy.Minimum ):
-			self.setMaximumHeight( self.heightForWidth( self.width() ) )
+			new_height = self.heightForWidth( self.width() )
+			if new_height < 1:
+				return
+			self.setMaximumHeight( new_height )
 
 class QNotification(QtWidgets.QWidget):
 	""" Class representing a single notification """
@@ -30,7 +33,7 @@ class QNotification(QtWidgets.QWidget):
 	closeClicked = QtCore.pyqtSignal()
 	""" PyQt signal for click on the notification's close button. """
 
-	def __init__(self, message, category, buttontext=None, *args, **kwargs):
+	def __init__(self, message, category, timeout=None, buttontext=None, *args, **kwargs):
 		"""Constructor
 
 		Parameters
@@ -45,6 +48,7 @@ class QNotification(QtWidgets.QWidget):
 		# Store instance variables
 		self.message = message
 		self.category = category
+		self.timeout = timeout
 
 		# Set Object name for reference
 		self.setObjectName(category)
@@ -116,6 +120,7 @@ class QNotification(QtWidgets.QWidget):
 		""" Displays the notification. """
 		self.message_display.setText(self.message)
 		self.show()
+		self.raise_()
 
 	def close(self):
 		""" Closes the notification. """
@@ -213,6 +218,6 @@ class QNotification(QtWidgets.QWidget):
 
 		allowed_values = ['primary','success','info','warning','danger']
 		if not value in allowed_values:
-			raise ValueError(u'{} not a valid value. '
-				'Should be one of').format(value, allowed_values)
+			raise ValueError(u'\"{}\" is not a valid value. '
+				'Should be one of {}'.format(value, str(allowed_values)))
 		self._category = value

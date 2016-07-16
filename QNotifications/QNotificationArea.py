@@ -9,6 +9,14 @@ from qtpy import QtWidgets, QtCore, QtGui
 from QNotifications.QNotification import QNotification
 from QNotifications.abstractions import *
 
+try:
+	# Python 3
+	from queue import Queue, Empty
+except:
+	# Python 2
+	from Queue import Queue, Empty
+
+
 __author__ = u"Daniel Schreij"
 __license__ = u"GPLv3"
 
@@ -63,7 +71,6 @@ class QNotificationArea(QtWidgets.QWidget):
 	}
 	"""
 
-	### OpenSesame events
 	def __init__(self, targetWidget, *args, **kwargs):
 		"""Constructor
 
@@ -75,6 +82,13 @@ class QNotificationArea(QtWidgets.QWidget):
 			Flag which indicates whether global style sheets should be used
 			(which have been set at app-level). If False, the default style sheets
 			stored at self.default_notification_styles will be loaded.
+		useQueue : bool (default: True)
+			Indicates whether a message queue should be implemented. This will only
+			show *maxMessages* at the same time and will put all other messages in a
+			queue. Once a message disappears, the next one in the queue will be shown
+			(up to maxMessages at the same time)
+		maxMessages : int (default: 2)
+			The number of messages to display at the same time.
 
 		Raises
 		------
@@ -84,12 +98,18 @@ class QNotificationArea(QtWidgets.QWidget):
 		if not isinstance(targetWidget, QtWidgets.QWidget):
 			raise TypeError('targetWidget is not a QWidget (or child of it')
 
-
+		# Pop some variables from kwargs.
 		useGlobalCSS = kwargs.pop(u'useGlobalCSS', False)
+		self.useQueue = kwargs.pop(u'useQueue', True)
+		self.maxMessages = kwargs.pop(u'maxMessages', 2)
+
 		super(QNotificationArea, self).__init__(*args, **kwargs)
 
 		if not useGlobalCSS:
 			self.setStyleSheet(self.default_notification_styles)
+
+		if self.useQueue:
+			self.queue = Queue()
 
 		self.setParent(targetWidget)
 		self.targetWidget = targetWidget
@@ -116,10 +136,18 @@ class QNotificationArea(QtWidgets.QWidget):
 		""" Closes and destroys the supplied notification. """
 		notification.close()
 		self.layout().removeWidget(notification)
+
 		self.adjustSize()
 		# Hide notification area if it doesn't contain any items
 		if self.layout().count() == 0:
 			self.hide()
+
+		if self.useQueue:
+			try:
+				notification = self.queue.get(False)
+				self._show_notification(notification)
+			except Empty:
+				pass
 
 	# Public functions
 	def setEntryEffect(self, effect, duration=250):
@@ -188,6 +216,9 @@ class QNotificationArea(QtWidgets.QWidget):
 	def display(self, message, category, timeout=5000, buttontext=None):
 		""" Displays a notification.
 
+		If a queue is used, then the notification will only be shown directly
+		if the number of notifications shown is smaller than maxMessages. 
+
 		Parameters
 		----------
 		message : str
@@ -207,11 +238,22 @@ class QNotificationArea(QtWidgets.QWidget):
 		ValueError
 			if the category is other than one of the expected values.
 		"""
-
-		self.show()
-		notification = QNotification(message, category, buttontext, self)
+		notification = QNotification(message, category, timeout, buttontext, self)
 		notification.closeClicked.connect(self.remove)
+		
+		# Queue if max amount of notifications is shown
+		if self.useQueue and self.layout().count() >= self.maxMessages:
+			self.queue.put(notification)
+		else:
+			self._show_notification(notification)
+
+	def _show_notification(self, notification):
+		if not self.isVisible():
+			self.show()
+			self.raise_()
+
 		self.layout().addWidget(notification)
+			
 		# Check for entry effects
 		if not self.entryEffect is None:
 			if self.entryEffect == u"fadeIn":
@@ -220,9 +262,10 @@ class QNotificationArea(QtWidgets.QWidget):
 			notification.display()
 
 		self.adjustSize()
-		if not timeout is None and timeout > 0:
-			QtCore.QTimer.singleShot(timeout,
+		if not notification.timeout is None and notification.timeout > 0:
+			QtCore.QTimer.singleShot(notification.timeout,
 				lambda : self.remove(notification))
+
 
 	@QtCore.pyqtSlot()
 	def remove(self, notification = None):
