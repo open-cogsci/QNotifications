@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>QNotifications.QNotificationArea &mdash; QNotifications 1.0.7 documentation</title>
+  <title>QNotifications.QNotificationArea &mdash; QNotifications 1.1.0 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="QNotifications 1.0.7 documentation" href="../../index.html"/>
+    <link rel="top" title="QNotifications 1.1.0 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.7
+                1.1.0
               </div>
             
           
@@ -139,6 +139,14 @@
 <span class="kn">from</span> <span class="nn">QNotifications.QNotification</span> <span class="kn">import</span> <span class="n">QNotification</span>
 <span class="kn">from</span> <span class="nn">QNotifications.abstractions</span> <span class="kn">import</span> <span class="o">*</span>
 
+<span class="k">try</span><span class="p">:</span>
+	<span class="c1"># Python 3</span>
+	<span class="kn">from</span> <span class="nn">queue</span> <span class="kn">import</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">Empty</span>
+<span class="k">except</span><span class="p">:</span>
+	<span class="c1"># Python 2</span>
+	<span class="kn">from</span> <span class="nn">Queue</span> <span class="kn">import</span> <span class="n">Queue</span><span class="p">,</span> <span class="n">Empty</span>
+
+
 <span class="n">__author__</span> <span class="o">=</span> <span class="s2">u&quot;Daniel Schreij&quot;</span>
 <span class="n">__license__</span> <span class="o">=</span> <span class="s2">u&quot;GPLv3&quot;</span>
 
@@ -193,7 +201,6 @@
 <span class="s2">	}</span>
 <span class="s2">	&quot;&quot;&quot;</span>
 
-	<span class="c1">### OpenSesame events</span>
 <div class="viewcode-block" id="QNotificationArea.__init__"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.__init__">[docs]</a>	<span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">targetWidget</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot;Constructor</span>
 
@@ -205,6 +212,13 @@
 <span class="sd">			Flag which indicates whether global style sheets should be used</span>
 <span class="sd">			(which have been set at app-level). If False, the default style sheets</span>
 <span class="sd">			stored at self.default_notification_styles will be loaded.</span>
+<span class="sd">		useQueue : bool (default: True)</span>
+<span class="sd">			Indicates whether a message queue should be implemented. This will only</span>
+<span class="sd">			show *maxMessages* at the same time and will put all other messages in a</span>
+<span class="sd">			queue. Once a message disappears, the next one in the queue will be shown</span>
+<span class="sd">			(up to maxMessages at the same time)</span>
+<span class="sd">		maxMessages : int (default: 2)</span>
+<span class="sd">			The number of messages to display at the same time.</span>
 
 <span class="sd">		Raises</span>
 <span class="sd">		------</span>
@@ -214,17 +228,23 @@
 		<span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">targetWidget</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
 			<span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;targetWidget is not a QWidget (or child of it&#39;</span><span class="p">)</span>
 
-
+		<span class="c1"># Pop some variables from kwargs.</span>
 		<span class="n">useGlobalCSS</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">u&#39;useGlobalCSS&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">useQueue</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">u&#39;useQueue&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+		<span class="bp">self</span><span class="o">.</span><span class="n">maxMessages</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s1">u&#39;maxMessages&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
 		<span class="nb">super</span><span class="p">(</span><span class="n">QNotificationArea</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-		
+
 		<span class="k">if</span> <span class="ow">not</span> <span class="n">useGlobalCSS</span><span class="p">:</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">default_notification_styles</span><span class="p">)</span>
-		
+
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">useQueue</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="o">=</span> <span class="n">Queue</span><span class="p">()</span>
+
 		<span class="bp">self</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="n">targetWidget</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">targetWidget</span> <span class="o">=</span> <span class="n">targetWidget</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">setContentsMargins</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-		
+
 		<span class="n">notification_area_layout</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QVBoxLayout</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="n">notification_area_layout</span><span class="p">)</span>
 
@@ -246,15 +266,23 @@
 		<span class="sd">&quot;&quot;&quot; Closes and destroys the supplied notification. &quot;&quot;&quot;</span>
 		<span class="n">notification</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span><span class="o">.</span><span class="n">removeWidget</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
+
 		<span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
 		<span class="c1"># Hide notification area if it doesn&#39;t contain any items</span>
 		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
 			<span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
 
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">useQueue</span><span class="p">:</span>
+			<span class="k">try</span><span class="p">:</span>
+				<span class="n">notification</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">False</span><span class="p">)</span>
+				<span class="bp">self</span><span class="o">.</span><span class="n">_show_notification</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
+			<span class="k">except</span> <span class="n">Empty</span><span class="p">:</span>
+				<span class="k">pass</span>
+
 	<span class="c1"># Public functions</span>
 <div class="viewcode-block" id="QNotificationArea.setEntryEffect"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.setEntryEffect">[docs]</a>	<span class="k">def</span> <span class="nf">setEntryEffect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">250</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Sets the effect with which the notifications are to appear. </span>
-<span class="sd">	</span>
+		<span class="sd">&quot;&quot;&quot; Sets the effect with which the notifications are to appear.</span>
+
 <span class="sd">		Parameters</span>
 <span class="sd">		----------</span>
 <span class="sd">		effect : {&#39;fadeIn&#39;, None}</span>
@@ -283,8 +311,8 @@
 		<span class="bp">self</span><span class="o">.</span><span class="n">entryEffectDuration</span> <span class="o">=</span> <span class="n">duration</span></div>
 
 <div class="viewcode-block" id="QNotificationArea.setExitEffect"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.setExitEffect">[docs]</a>	<span class="k">def</span> <span class="nf">setExitEffect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mi">500</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Sets the effect with which the notifications are to disappear. </span>
-<span class="sd">	</span>
+		<span class="sd">&quot;&quot;&quot; Sets the effect with which the notifications are to disappear.</span>
+
 <span class="sd">		Parameters</span>
 <span class="sd">		----------</span>
 <span class="sd">		effect : {&#39;fadeOut&#39;, None}</span>
@@ -314,9 +342,13 @@
 
 	<span class="c1"># Events</span>
 	<span class="nd">@QtCore.pyqtSlot</span><span class="p">(</span><span class="s1">&#39;QString&#39;</span><span class="p">,</span> <span class="s1">&#39;QString&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">)</span>
-<div class="viewcode-block" id="QNotificationArea.display"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.display">[docs]</a>	<span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5000</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Displays a notification. </span>
-<span class="sd">	</span>
+	<span class="nd">@QtCore.pyqtSlot</span><span class="p">(</span><span class="s1">&#39;QString&#39;</span><span class="p">,</span> <span class="s1">&#39;QString&#39;</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="s1">&#39;QString&#39;</span><span class="p">)</span>
+<div class="viewcode-block" id="QNotificationArea.display"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.display">[docs]</a>	<span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">buttontext</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+		<span class="sd">&quot;&quot;&quot; Displays a notification.</span>
+
+<span class="sd">		If a queue is used, then the notification will only be shown directly</span>
+<span class="sd">		if the number of notifications shown is smaller than maxMessages. </span>
+
 <span class="sd">		Parameters</span>
 <span class="sd">		----------</span>
 <span class="sd">		message : str</span>
@@ -324,20 +356,34 @@
 <span class="sd">		category : {&#39;primary&#39;, &#39;success&#39;, &#39;info&#39;, &#39;warning&#39;, &#39;danger&#39;}</span>
 <span class="sd">			The type of notification that should be shown. Adheres to bootstrap</span>
 <span class="sd">			standards which are primary, success, info, warning and danger</span>
-<span class="sd">		timeout : int (default: 5000)</span>
+<span class="sd">		timeout : int, optional</span>
 <span class="sd">			The duration for which the notification should be shown. If None then</span>
 <span class="sd">			the notification will be shown indefinitely</span>
+<span class="sd">		buttontext : str, optional</span>
+<span class="sd">			The text to display on the closing button. If not provided a cross</span>
+<span class="sd">			will be shown.</span>
 
 <span class="sd">		Raises</span>
 <span class="sd">		------</span>
 <span class="sd">		ValueError</span>
 <span class="sd">			if the category is other than one of the expected values.</span>
 <span class="sd">		&quot;&quot;&quot;</span>
-
-		<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-		<span class="n">notification</span> <span class="o">=</span> <span class="n">QNotification</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+		<span class="n">notification</span> <span class="o">=</span> <span class="n">QNotification</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">category</span><span class="p">,</span> <span class="n">timeout</span><span class="p">,</span> <span class="n">buttontext</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 		<span class="n">notification</span><span class="o">.</span><span class="n">closeClicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">)</span>
+		
+		<span class="c1"># Queue if max amount of notifications is shown</span>
+		<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">useQueue</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">maxMessages</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">queue</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
+		<span class="k">else</span><span class="p">:</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">_show_notification</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span></div>
+
+	<span class="k">def</span> <span class="nf">_show_notification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notification</span><span class="p">):</span>
+		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isVisible</span><span class="p">():</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+			<span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">()</span>
+
 		<span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
+			
 		<span class="c1"># Check for entry effects</span>
 		<span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">entryEffect</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
 			<span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">entryEffect</span> <span class="o">==</span> <span class="s2">u&quot;fadeIn&quot;</span><span class="p">:</span>
@@ -346,14 +392,15 @@
 			<span class="n">notification</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
 
 		<span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
-		<span class="k">if</span> <span class="ow">not</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-			<span class="n">QtCore</span><span class="o">.</span><span class="n">QTimer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span><span class="n">timeout</span><span class="p">,</span> 
-				<span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">notification</span><span class="p">))</span></div>
+		<span class="k">if</span> <span class="ow">not</span> <span class="n">notification</span><span class="o">.</span><span class="n">timeout</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">notification</span><span class="o">.</span><span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+			<span class="n">QtCore</span><span class="o">.</span><span class="n">QTimer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span><span class="n">notification</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span>
+				<span class="k">lambda</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">notification</span><span class="p">))</span>
+
 
 	<span class="nd">@QtCore.pyqtSlot</span><span class="p">()</span>
 <div class="viewcode-block" id="QNotificationArea.remove"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.remove">[docs]</a>	<span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notification</span> <span class="o">=</span> <span class="bp">None</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot; Removes a notification.</span>
-<span class="sd">	</span>
+
 <span class="sd">		Parameters</span>
 <span class="sd">		----------</span>
 <span class="sd">		notification : QNotification (default: None)</span>
@@ -396,20 +443,18 @@
 <div class="viewcode-block" id="QNotificationArea.resizeEvent"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.resizeEvent">[docs]</a>	<span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 		<span class="sd">&quot;&quot;&quot; Internal QT function (do not call directly). &quot;&quot;&quot;</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">target_resize_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-		<span class="n">newsize</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>		
+		<span class="n">newsize</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="n">newsize</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span></div>
 
 <div class="viewcode-block" id="QNotificationArea.paintEvent"><a class="viewcode-back" href="../../api.html#QNotifications.QNotificationArea.QNotificationArea.paintEvent">[docs]</a>	<span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pe</span><span class="p">):</span>
-		<span class="sd">&quot;&quot;&quot; Redefinition of paintEvent. </span>
-<span class="sd">		Makes class QNotificationArea available in style sheets. </span>
+		<span class="sd">&quot;&quot;&quot; Redefinition of paintEvent.</span>
+<span class="sd">		Makes class QNotificationArea available in style sheets.</span>
 <span class="sd">		Internal QT function (do not call directly) &quot;&quot;&quot;</span>
 		<span class="n">o</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QStyleOption</span><span class="p">()</span>
 		<span class="n">o</span><span class="o">.</span><span class="n">initFrom</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 		<span class="n">p</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 		<span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QStyle</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span></div></div>
-	
-	
 </pre></div>
 
            </div>
@@ -443,7 +488,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'1.0.7',
+            VERSION:'1.1.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

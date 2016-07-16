@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>API Reference &mdash; QNotifications 1.0.7 documentation</title>
+  <title>API Reference &mdash; QNotifications 1.1.0 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="QNotifications 1.0.7 documentation" href="index.html"/>
+    <link rel="top" title="QNotifications 1.1.0 documentation" href="index.html"/>
         <link rel="prev" title="Manual" href="main.html"/> 
 
   
@@ -59,7 +59,7 @@
             
             
               <div class="version">
-                1.0.7
+                1.1.0
               </div>
             
           
@@ -148,7 +148,7 @@ another QWidget which should be passed as an argument to this class.</p>
 <col width="90%" />
 </colgroup>
 <tbody valign="top">
-<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.display" title="QNotifications.QNotificationArea.QNotificationArea.display"><code class="xref py py-obj docutils literal"><span class="pre">display</span></code></a>(message,&nbsp;category[,&nbsp;timeout])</td>
+<tr class="row-odd"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.display" title="QNotifications.QNotificationArea.QNotificationArea.display"><code class="xref py py-obj docutils literal"><span class="pre">display</span></code></a>(message,&nbsp;category[,&nbsp;timeout,&nbsp;buttontext])</td>
 <td>Displays a notification.</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="#QNotifications.QNotificationArea.QNotificationArea.paintEvent" title="QNotifications.QNotificationArea.QNotificationArea.paintEvent"><code class="xref py py-obj docutils literal"><span class="pre">paintEvent</span></code></a>(pe)</td>
@@ -186,6 +186,17 @@ another QWidget which should be passed as an argument to this class.</p>
 (which have been set at app-level). If False, the default style sheets
 stored at self.default_notification_styles will be loaded.</p>
 </div></blockquote>
+<p><strong>useQueue</strong> : bool (default: True)</p>
+<blockquote>
+<div><p>Indicates whether a message queue should be implemented. This will only
+show <em>maxMessages</em> at the same time and will put all other messages in a
+queue. Once a message disappears, the next one in the queue will be shown
+(up to maxMessages at the same time)</p>
+</div></blockquote>
+<p><strong>maxMessages</strong> : int (default: 2)</p>
+<blockquote>
+<div><p>The number of messages to display at the same time.</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Raises:</th><td class="field-body"><p class="first last"><strong>TypeError</strong> : if targetWidget is not an object that inherits QWidget</p>
@@ -197,8 +208,10 @@ stored at self.default_notification_styles will be loaded.</p>
 
 <dl class="method">
 <dt id="QNotifications.QNotificationArea.QNotificationArea.display">
-<code class="descname">display</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>timeout=5000</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.display" title="Permalink to this definition">¶</a></dt>
+<code class="descname">display</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>timeout=5000</em>, <em>buttontext=None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.display" title="Permalink to this definition">¶</a></dt>
 <dd><p>Displays a notification.</p>
+<p>If a queue is used, then the notification will only be shown directly
+if the number of notifications shown is smaller than maxMessages.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -212,10 +225,15 @@ stored at self.default_notification_styles will be loaded.</p>
 <div><p>The type of notification that should be shown. Adheres to bootstrap
 standards which are primary, success, info, warning and danger</p>
 </div></blockquote>
-<p><strong>timeout</strong> : int (default: 5000)</p>
+<p><strong>timeout</strong> : int, optional</p>
 <blockquote>
 <div><p>The duration for which the notification should be shown. If None then
 the notification will be shown indefinitely</p>
+</div></blockquote>
+<p><strong>buttontext</strong> : str, optional</p>
+<blockquote>
+<div><p>The text to display on the closing button. If not provided a cross
+will be shown.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -232,8 +250,8 @@ the notification will be shown indefinitely</p>
 <dl class="method">
 <dt id="QNotifications.QNotificationArea.QNotificationArea.paintEvent">
 <code class="descname">paintEvent</code><span class="sig-paren">(</span><em>pe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.paintEvent" title="Permalink to this definition">¶</a></dt>
-<dd><p>Redefinition of paintEvent. 
-Makes class QNotificationArea available in style sheets. 
+<dd><p>Redefinition of paintEvent.
+Makes class QNotificationArea available in style sheets.
 Internal QT function (do not call directly)</p>
 </dd></dl>
 
@@ -344,7 +362,7 @@ notifcations will just appear directly.</p>
 <span id="qnotification"></span><h2>QNotification<a class="headerlink" href="#module-QNotifications.QNotification" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="QNotifications.QNotification.QNotification">
-<em class="property">class </em><code class="descclassname">QNotifications.QNotification.</code><code class="descname">QNotification</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="descclassname">QNotifications.QNotification.</code><code class="descname">QNotification</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>timeout=None</em>, <em>buttontext=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
 <p>Class representing a single notification</p>
 <p class="rubric">Attributes</p>
@@ -391,7 +409,7 @@ notifcations will just appear directly.</p>
 </table>
 <dl class="method">
 <dt id="QNotifications.QNotification.QNotification.__init__">
-<code class="descname">__init__</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.__init__" title="Permalink to this definition">¶</a></dt>
+<code class="descname">__init__</code><span class="sig-paren">(</span><em>message</em>, <em>category</em>, <em>timeout=None</em>, <em>buttontext=None</em>, <em>*args</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.__init__" title="Permalink to this definition">¶</a></dt>
 <dd><p>Constructor</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -403,7 +421,7 @@ notifcations will just appear directly.</p>
 </div></blockquote>
 <p><strong>category</strong> : {&#8216;primary&#8217;, &#8216;success&#8217;, &#8216;info&#8217;, &#8216;warning&#8217;, &#8216;danger&#8217;}</p>
 <blockquote class="last">
-<div><p>The type of notification. Adheres to bootstrap standard 
+<div><p>The type of notification. Adheres to bootstrap standard
 classes which are {primary, success, info, warning, danger}</p>
 </div></blockquote>
 </td>
@@ -498,8 +516,8 @@ clean up the notification)</p>
 <dl class="method">
 <dt id="QNotifications.QNotification.QNotification.paintEvent">
 <code class="descname">paintEvent</code><span class="sig-paren">(</span><em>pe</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.paintEvent" title="Permalink to this definition">¶</a></dt>
-<dd><p>redefinition of paintEvent, do not call directly. 
-Makes class QNotification available in style sheets. Interal Qt function. 
+<dd><p>redefinition of paintEvent, do not call directly.
+Makes class QNotification available in style sheets. Interal Qt function.
 Should not be called directly.</p>
 </dd></dl>
 
@@ -547,7 +565,7 @@ Should not be called directly.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'1.0.7',
+            VERSION:'1.1.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
