@@ -33,7 +33,7 @@ import sys
 
 class Example(QtCore.QObject):
 	""" Example showing off the notifications """
-	notify = QtCore.pyqtSignal(['QString', 'QString', int],
+	notify = QtCore.Signal(['QString', 'QString', int],
 		['QString', 'QString', int, 'QString'])
 
 	def __init__(self):
@@ -173,7 +173,7 @@ class Example(QtCore.QObject):
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
 
-	print(QtCore.QT_VERSION_STR)
+	print(QtCore.PYQT_VERSION_STR)
 
 	# Enable High DPI display with PyQt5
 	if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):

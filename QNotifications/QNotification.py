@@ -30,7 +30,7 @@ class MessageLabel(QtWidgets.QLabel):
 class QNotification(QtWidgets.QWidget):
 	""" Class representing a single notification """
 
-	closeClicked = QtCore.pyqtSignal()
+	closeClicked = QtCore.Signal()
 	""" PyQt signal for click on the notification's close button. """
 
 	def __init__(self, message, category, timeout=None, buttontext=None, *args, **kwargs):

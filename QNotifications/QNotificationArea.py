@@ -211,8 +211,8 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.exitEffectDuration = duration
 
 	# Events
-	@QtCore.pyqtSlot('QString', 'QString', int)
-	@QtCore.pyqtSlot('QString', 'QString', int, 'QString')
+	@QtCore.Slot('QString', 'QString', int)
+	@QtCore.Slot('QString', 'QString', int, 'QString')
 	def display(self, message, category, timeout=5000, buttontext=None):
 		""" Displays a notification.
 
@@ -267,7 +267,7 @@ class QNotificationArea(QtWidgets.QWidget):
 				lambda : self.remove(notification))
 
 
-	@QtCore.pyqtSlot()
+	@QtCore.Slot()
 	def remove(self, notification = None):
 		""" Removes a notification.
 
