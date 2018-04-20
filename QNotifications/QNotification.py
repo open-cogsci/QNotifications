@@ -35,7 +35,7 @@ class QNotification(QtWidgets.QWidget):
 
 	def __init__(
 		self, message, category, timeout=None, autohide=False, buttontext=None,
-		*args, **kwargs,
+		*args, **kwargs
 	):
 		"""Constructor
 
