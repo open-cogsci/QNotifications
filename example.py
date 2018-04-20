@@ -33,8 +33,10 @@ import sys
 
 class Example(QtCore.QObject):
 	""" Example showing off the notifications """
-	notify = QtCore.Signal(['QString', 'QString', int],
-		['QString', 'QString', int, 'QString'])
+	notify = QtCore.Signal(
+		['QString', 'QString', int, bool],
+		['QString', 'QString', int, bool, 'QString']
+	)
 
 	def __init__(self):
 		super(Example,self).__init__()
@@ -64,6 +66,12 @@ class Example(QtCore.QObject):
 		self.message_duration.setRange(500, 5000)
 		self.message_duration.setValue(5000)
 		self.message_duration.setSingleStep(50)
+		# Notification auto-hide
+		autohide_label = QtWidgets.QLabel(
+			"Automatically hide on mouse over:",
+			display_widget
+		)
+		self.message_autohide = QtWidgets.QCheckBox(display_widget)
 		# Entry effect
 		entryeffect_label = QtWidgets.QLabel("Entry effect: ", display_widget)
 		self.entry_dropdown = QtWidgets.QComboBox(display_widget)
@@ -101,6 +109,7 @@ class Example(QtCore.QObject):
 		inputLayout.addRow(message_label, self.message_textbox)
 		inputLayout.addRow(type_label, self.type_dropdown)
 		inputLayout.addRow(duration_label, self.message_duration)
+		inputLayout.addRow(autohide_label, self.message_autohide)
 		inputLayout.addRow(entryeffect_label, self.entry_dropdown)
 		inputLayout.addRow(self.entryduration_label, self.entryduration)
 		inputLayout.addRow(exiteffect_label, self.exit_dropdown)
@@ -124,9 +133,12 @@ class Example(QtCore.QObject):
 
 	def __setup_notification_area(self, targetWidget):
 		notification_area = QNotifications.QNotificationArea(targetWidget)
-		self.notify['QString', 'QString', int].connect(notification_area.display)
-		self.notify['QString', 'QString', int, 'QString'].connect(
-			notification_area.display)
+		self.notify['QString', 'QString', int, bool].connect(
+			notification_area.display
+		)
+		self.notify['QString', 'QString', int, bool, 'QString'].connect(
+			notification_area.display
+		)
 		return notification_area
 
 	def __process_combo_change(self, val):
@@ -150,6 +162,7 @@ class Example(QtCore.QObject):
 		typevalue = self.type_dropdown.currentText()
 		if textvalue:
 			duration = self.message_duration.value()
+			autohide = self.message_autohide.isChecked()
 			entry_effect = self.entry_dropdown.currentText()
 			exit_effect = self.exit_dropdown.currentText()
 			if entry_effect != "None":
@@ -165,10 +178,13 @@ class Example(QtCore.QObject):
 
 			buttontext = self.buttontext_textbox.text().strip()
 			if buttontext:
-				self.notify['QString', 'QString', int, 'QString'].emit(
-					textvalue, typevalue, duration, buttontext)
+				self.notify['QString', 'QString', int, bool, 'QString'].emit(
+					textvalue, typevalue, duration, autohide, buttontext
+				)
 			else:
-				self.notify.emit(textvalue, typevalue, duration)
+				self.notify['QString', 'QString', int, bool].emit(
+					textvalue, typevalue, duration, autohide
+				)
 
 if __name__ == "__main__":
 	app = QtWidgets.QApplication(sys.argv)
