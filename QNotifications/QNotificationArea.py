@@ -210,14 +210,13 @@ class QNotificationArea(QtWidgets.QWidget):
 		self.exitEffect = effect
 		self.exitEffectDuration = duration
 
-	# Events
-	@QtCore.Slot('QString', 'QString', int)
-	@QtCore.Slot('QString', 'QString', int, 'QString')
-	def display(self, message, category, timeout=5000, buttontext=None):
+	@QtCore.Slot('QString', 'QString', int, bool)
+	@QtCore.Slot('QString', 'QString', int, bool, 'QString')
+	def display(self, message, category, timeout=5000, autohide=False, buttontext=None):
 		""" Displays a notification.
 
 		If a queue is used, then the notification will only be shown directly
-		if the number of notifications shown is smaller than maxMessages. 
+		if the number of notifications shown is smaller than maxMessages.
 
 		Parameters
 		----------
@@ -238,9 +237,9 @@ class QNotificationArea(QtWidgets.QWidget):
 		ValueError
 			if the category is other than one of the expected values.
 		"""
-		notification = QNotification(message, category, timeout, buttontext, self)
+		notification = QNotification(message, category, timeout, autohide, buttontext, self)
 		notification.closeClicked.connect(self.remove)
-		
+
 		# Queue if max amount of notifications is shown
 		if self.useQueue and self.layout().count() >= self.maxMessages:
 			self.queue.put(notification)
@@ -253,7 +252,7 @@ class QNotificationArea(QtWidgets.QWidget):
 			self.raise_()
 
 		self.layout().addWidget(notification)
-			
+
 		# Check for entry effects
 		if not self.entryEffect is None:
 			if self.entryEffect == u"fadeIn":

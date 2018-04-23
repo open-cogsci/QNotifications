@@ -33,7 +33,10 @@ class QNotification(QtWidgets.QWidget):
 	closeClicked = QtCore.Signal()
 	""" PyQt signal for click on the notification's close button. """
 
-	def __init__(self, message, category, timeout=None, buttontext=None, *args, **kwargs):
+	def __init__(
+		self, message, category, timeout=None, autohide=False, buttontext=None,
+		*args, **kwargs
+	):
 		"""Constructor
 
 		Parameters
@@ -49,6 +52,7 @@ class QNotification(QtWidgets.QWidget):
 		self.message = message
 		self.category = category
 		self.timeout = timeout
+		self.autohide = autohide
 
 		# Set Object name for reference
 		self.setObjectName(category)
@@ -221,3 +225,12 @@ class QNotification(QtWidgets.QWidget):
 			raise ValueError(u'\"{}\" is not a valid value. '
 				'Should be one of {}'.format(value, str(allowed_values)))
 		self._category = value
+
+	def enterEvent(self, e):
+
+		""" When the notification is set to auto-hide, it automatically closes
+		when the mouse enters the notifcation.
+		"""
+
+		if self.autohide:
+			self.closeClicked.emit()
