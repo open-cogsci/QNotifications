@@ -267,7 +267,7 @@ class QNotificationArea(QtWidgets.QWidget):
 
 
 	@QtCore.Slot()
-	def remove(self, notification = None):
+	def remove(self, notification=None):
 		""" Removes a notification.
 
 		Parameters
@@ -292,10 +292,9 @@ class QNotificationArea(QtWidgets.QWidget):
 					'or this function should be used as a slot for a signal'
 					' emitted by a QNotification')
 
-		if notification.isBeingRemoved:
+		if notification.isBeingRemoved or notification.isFadingIn:
 			return
-		else:
-			notification.isBeingRemoved = True
+		notification.isBeingRemoved = True
 
 		# Check if notification is still present (and has not manually been
 		# closed before this function is called by a timeout)
