@@ -92,3 +92,5 @@ build_all
 
 # Debian build files
 deb_dist/*
+
+.vscode

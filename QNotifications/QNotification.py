@@ -58,11 +58,8 @@ class QNotification(QtWidgets.QWidget):
 		self.setObjectName(category)
 		self.setLayout(QtWidgets.QHBoxLayout())
 		self.setContentsMargins(0,0,0,0)
-		# self.setSizePolicy(QtWidgets.QSizePolicy.Minimum,
-		# 	QtWidgets.QSizePolicy.Fixed)
 
 		# Create a message area
-		#contents = QtWidgets.QWidget(self)
 		messageArea = QtWidgets.QHBoxLayout()
 		messageArea.setContentsMargins(0,0,0,0)
 
@@ -97,7 +94,7 @@ class QNotification(QtWidgets.QWidget):
 
 		# Flag that is set if notification is being removed. This can be used to
 		# make sure that even though the notification has not been really removed
-		# yet (because it is for example in an fade out animation), it is in the
+		# yet (because it is for example in a fade out animation), it is in the
 		# process of being removed
 		self.isBeingRemoved = False
 		self.isFadingIn = False
