@@ -100,6 +100,7 @@ class QNotification(QtWidgets.QWidget):
 		# yet (because it is for example in an fade out animation), it is in the
 		# process of being removed
 		self.isBeingRemoved = False
+		self.isFadingIn = False
 
 		self.__init_graphic_effects()
 
@@ -149,8 +150,18 @@ class QNotification(QtWidgets.QWidget):
 			raise TypeError("duration should be an integer")
 		self.setGraphicsEffect(self.opacityEffect)
 		self.fadeInAnimation.setDuration(duration)
+		self.isFadingIn = True
+		self.fadeInAnimation.finished.connect(self.onFadeInFinished)
 		self.display()
 		self.fadeInAnimation.start()
+
+	def onFadeInFinished(self):
+
+		""" Indicates that the fade-in animation is done, so that the
+		notification can be interacted withself.
+		"""
+
+		self.isFadingIn = False
 
 	def fadeOut(self, finishedCallback, duration):
 		""" Fades out the notification.

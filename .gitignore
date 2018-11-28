@@ -89,3 +89,6 @@ ENV/
 
 # Repository build and upload
 build_all
+
+# Debian build files
+deb_dist/*
