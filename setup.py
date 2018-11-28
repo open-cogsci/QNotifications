@@ -31,6 +31,7 @@ setup(
 	packages=find_packages('.'),
 	install_requires=[
 		'qtpy',
+		'PyQt5'
 	],
 	classifiers=[
 		'Intended Audience :: Developers',
