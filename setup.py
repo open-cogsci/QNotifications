@@ -29,10 +29,7 @@ setup(
 	author_email='dschreij@gmail.com',
 	url='https://github.com/dschreij/QNotifications',
 	packages=find_packages('.'),
-	install_requires=[
-		'qtpy',
-		'PyQt5'
-	],
+	install_requires=['qtpy'],
 	classifiers=[
 		'Intended Audience :: Developers',
 		'Topic :: Desktop Environment',
