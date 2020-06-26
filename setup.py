@@ -34,11 +34,10 @@ setup(
 	classifiers=[
 		'Intended Audience :: Developers',
 		'Topic :: Desktop Environment',
-		'Topic :: Communications :: Email',
 		'Operating System :: MacOS :: MacOS X',
 		'Operating System :: Microsoft :: Windows',
 		'Operating System :: POSIX',
-		'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+		'License :: OSI Approved :: GNU Lesser General Public License v3 (LGPLv3)',
 		'Programming Language :: Python :: 2',
 		'Programming Language :: Python :: 3',
 	],
