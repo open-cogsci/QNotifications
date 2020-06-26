@@ -17,9 +17,9 @@ QNotifications can easily be installed using pip::
 
     pip install python-qnotifications
 
-If you are using the Anaconda Python distribution (by which you will be doing yourself a big favor), the module is also available as a conda package in the cogsci channel on anaconda.org::
+If you are using the Anaconda Python distribution (by which you will be doing yourself a big favor), the module is also available as a conda package in the conda-forge channel on anaconda.org::
 
-    conda install python-qnotifications -c cogsci
+    conda install python-qnotifications -c conda-forge
 
 Alternatively, you can just clone this repository and install it yourself::
 
@@ -30,12 +30,12 @@ Alternatively, you can just clone this repository and install it yourself::
 Dependencies
 ~~~~~~~~~~~~
 
-QNotifications of course heavily relies on PyQt and the abstraction layer qtpy, which makes it easier to write code that works PyQt4 and 5 at the same time, but that should be all you need to make it work.
+QNotifications of course heavily relies on PyQt and the abstraction layer qtpy, which makes it easier to write code that works with PyQt4 and 5 at the same time, but that should be all you need to make it work.
 
 Example
 -------
-The module comes with a ready to run example (pending that the dependencies are installed). To see what QNotifications has in store, simply run::
-    
+The module comes with a ready to run example (given that the dependencies are installed). To see what QNotifications has in store, simply run::
+
     python example.py
 
 and play around with the interface which offers various possibilities to display notifications.
@@ -120,40 +120,40 @@ QNotifications has been built in such a way that the appearance of its elements 
         margin: 0px;
         border-radius: 6px;
     }
-    
+
     QNotification #message{
         color: #FFFFFF;
         padding: 0px;
         margin: 0px;
         width: 100%;
     }
-    
+
     QNotification #closeButton{
         color: #FFFFFF;
         padding: 0px;
         margin: 0px;
     }
-    
+
     QNotification #primary {
         background-color: #337ab7;
         border-color: #2e6da4;
     }
-    
+
     QNotification #success {
         background-color: #5cb85c;
         border-color: #4cae4c;
     }
-    
+
     QNotification #info {
         background-color: #5bc0de;
         border-color: #46b8da;
     }
-    
+
     QNotification #warning {
         background-color: #f0ad4e;
         border-color: #eea236;
     }
-    
+
     QNotification #danger {
         background-color: #d9534f;
         border-color: #d43f3a;
@@ -170,9 +170,9 @@ Pay attention though, that if you pass this flag and you don't have any entries 
 
 License
 -------
-QNotifications is distributed under the terms of the GNU General Public License 3. The full license should be included in the file *copyright*, or can be obtained from:
+QNotifications is distributed under the terms of the GNU Lesser General Public License 3. The full license should be included in the file *license*, or can be obtained from:
 
-`<http://www.gnu.org/licenses/gpl.txt>`_
+`<https://www.gnu.org/licenses/lgpl-3.0.txt>`_
 
 
 
