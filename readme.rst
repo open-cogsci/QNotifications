@@ -19,7 +19,7 @@ QNotifications can easily be installed using pip::
 
 If you are using the Anaconda Python distribution (by which you will be doing yourself a big favor), the module is also available as a conda package in the conda-forge channel on anaconda.org::
 
-    conda install python-qnotifications -c conda-forge
+    conda install qnotifications -c conda-forge
 
 Alternatively, you can just clone this repository and install it yourself::
 
