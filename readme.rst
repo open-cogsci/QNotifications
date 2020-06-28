@@ -4,11 +4,25 @@
 
 .. image:: https://anaconda.org/cogsci/python-qnotifications/badges/license.svg
 
-QNotifications brings pretty in-app notifications to PyQt. We are used to seeing such notifications in many web applications nowadays (as an example, see `sAlert <http://s-alert-demo.meteorapp.com>`_), but functionality like this was still lacking in PyQt. QNotifications aims to provide a system that can display several types of notifications (info, errors, warnings, etc.) and can easily be plugged into existing PyQt projects. To integrate this module into existing applications just pass it a widget on which it should render the notifications.
+QNotifications brings pretty in-app notifications to PyQt. We are used to seeing such notifications
+in many web applications nowadays (as an example, see `sAlert <http://s-alert-demo.meteorapp.com>`_),
+but functionality like this was still lacking in PyQt. QNotifications aims to provide a system that
+can display several types of notifications (info, errors, warnings, etc.) and can easily be plugged
+into existing PyQt projects. To integrate this module into existing applications just pass it a widget
+on which it should render the notifications.
 
-I designed this system with the `Gnome UI guidlines for in-app notifications <https://developer.gnome.org/hig/stable/in-app-notifications.html.en>`_ in mind.However, I do deviate from them at some points. For example, QNotifications currently allows multiple notifications to be displayed simultaneously (they will be stacked on top of each other), while best practice is to display multiple notifications sequentially but only one a the time. Additionally, QNotifications currently does not offer the possibility to display a button to undertake an action inside a notification.
+I designed this system with the `Gnome UI guidlines for in-app notifications
+<https://developer.gnome.org/hig/stable/in-app-notifications.html.en>`_ in mind. However, I do
+deviate from them at some points. For example, QNotifications currently allows multiple notifications
+to be displayed simultaneously (they will be stacked on top of each other), while best practice is
+to display multiple notifications sequentially but only one a the time. Additionally, QNotifications
+currently does not offer the possibility to display a button to undertake an action inside a notification.
 
-This project is still in the starting blocks and does not offer many options for customisation yet. Notifications are always positioned at the top of the target widget and take up the whole width (with a margin). The only currently supported animation style is fading (in and out), or not to use any animation at all. In the future, more options will be added, but for now I have just focussed on maximizing the stability of this module.
+This project is still in the starting blocks and does not offer many options for customisation yet.
+Notifications are always positioned at the top of the target widget and take up the whole width
+(with a margin). The only currently supported animation style is fading (in and out), or not to use
+any animation at all. In the future, more options will be added, but for now I have just focussed
+on maximizing the stability of this module.
 
 Installation
 ------------
@@ -17,7 +31,8 @@ QNotifications can easily be installed using pip::
 
     pip install python-qnotifications
 
-If you are using the Anaconda Python distribution (by which you will be doing yourself a big favor), the module is also available as a conda package in the conda-forge channel on anaconda.org::
+If you are using the Anaconda Python distribution (by which you will be doing yourself a big favor),
+the module is also available as a conda package in the conda-forge channel on anaconda.org::
 
     conda install qnotifications -c conda-forge
 
@@ -30,22 +45,28 @@ Alternatively, you can just clone this repository and install it yourself::
 Dependencies
 ~~~~~~~~~~~~
 
-QNotifications of course heavily relies on PyQt and the abstraction layer qtpy, which makes it easier to write code that works with PyQt4 and 5 at the same time, but that should be all you need to make it work.
+QNotifications of course heavily relies on PyQt and the abstraction layer qtpy, which makes it easier
+to write code that works with PyQt4 and 5 at the same time, but that should be all you need to make it work.
 
 Example
 -------
-The module comes with a ready to run example (given that the dependencies are installed). To see what QNotifications has in store, simply run::
+The module comes with a ready to run example (given that the dependencies are installed).
+To see what QNotifications has in store, simply run::
 
     python example.py
 
 and play around with the interface which offers various possibilities to display notifications.
 
-.. image:: screenshot.png
+.. image:: /_static/screenshot.png
+   :alt: Screenshot
 
 Usage
 -----
 
-To use QNotifications, you have to initialize the QNotificationArea first, which is a transparent widget in which the notifications are to be displayed. This widget is overlayed on top of another widget already embedded in your application. This embedded widget has to be passed to the constructor of QNotificationArea.
+To use QNotifications, you have to initialize the QNotificationArea first, which is a transparent
+widget in which the notifications are to be displayed. This widget is overlayed on top of another
+widget already embedded in your application. This embedded widget has to be passed to the
+constructor of QNotificationArea.
 
 .. code-block:: python
 
@@ -67,12 +88,15 @@ To use QNotifications, you have to initialize the QNotificationArea first, which
     # Show a 'danger' styled notification until the user closes it manually.
     qna.display('This is an error notification', 'danger', None)
 
-The message can contain (a limited set of) HTML tags, which will be rendered correctly when the message is displayed.
+The message can contain (a limited set of) HTML tags, which will be rendered correctly when the
+message is displayed.
 
 Animations
 ~~~~~~~~~~
 
-To enable animations, you have to specify the animation style, for which at the moment the only the only options are 'fadeIn', 'fadeOut' or None. All notifications will be displayed with that animation style from that moment on until a different animation style is specified.
+To enable animations, you have to specify the animation style, for which at the moment the only
+the only options are 'fadeIn', 'fadeOut' or None. All notifications will be displayed with that
+animation style from that moment on until a different animation style is specified.
 
 .. code-block:: python
 
@@ -91,7 +115,10 @@ To enable animations, you have to specify the animation style, for which at the 
 Signal/Slot capabilities
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-The display() function of QNotificationArea also functions as a pyqt slot, expecting 3 arguments of type (str, str, int), corresponding to the contents of the message, its type, and the duration with which to display it. If one for instance would define a signal in an object that inherits from QtCore.QObject, the following is possible:
+The display() function of QNotificationArea also functions as a pyqt slot, expecting 3 arguments
+of type (str, str, int), corresponding to the contents of the message, its type, and the duration
+with which to display it. If one for instance would define a signal in an object that inherits
+from QtCore.QObject, the following is possible:
 
 .. code-block:: python
 
@@ -105,12 +132,16 @@ The display() function of QNotificationArea also functions as a pyqt slot, expec
             self.notify.emit("Object initialized","info",2000)
 
 
-A notification can then be displayed from anywhere by just emitting the objects *notify* signal with the desired parameters.
+A notification can then be displayed from anywhere by just emitting the objects *notify* signal
+with the desired parameters.
 
 Styling
 ~~~~~~~
 
-QNotifications has been built in such a way that the appearance of its elements can be directly altered using QSS (which is Qt's variant of CSS). When not explicitly instructed to do otherwise, QNotifications will use the default styles, which are based on [bootstrap's](http://getbootstrap.com) color coding principles. The standard styles are as follows
+QNotifications has been built in such a way that the appearance of its elements can be directly
+altered using QSS (which is Qt's variant of CSS). When not explicitly instructed to do otherwise,
+QNotifications will use the default styles, which are based on
+`bootstrap's <http://getbootstrap.com>`_ color coding principles. The standard styles are as follows
 
 .. code-block:: css
 
@@ -160,17 +191,20 @@ QNotifications has been built in such a way that the appearance of its elements 
     }
 
 
-To use a different (most of the time globally defined) style sheet, pass the useGlobalCSS flag to QNotificationArea when you initialize it
+To use a different (most of the time globally defined) style sheet, pass the useGlobalCSS flag to
+QNotificationArea when you initialize it
 
 .. code-block:: python
 
     qna = QNotificationArea(targetWidget, useGlobalCSS=True)
 
-Pay attention though, that if you pass this flag and you don't have any entries for the QNotification items in your qss files, they will have no styling at all.
+Pay attention though, that if you pass this flag and you don't have any entries for the QNotification
+items in your qss files, they will have no styling at all.
 
 License
 -------
-QNotifications is distributed under the terms of the GNU Lesser General Public License 3. The full license should be included in the file *license*, or can be obtained from:
+QNotifications is distributed under the terms of the GNU Lesser General Public License 3. The full
+license should be included in the file *license*, or can be obtained from:
 
 `<https://www.gnu.org/licenses/lgpl-3.0.txt>`_
 

@@ -1,0 +1,500 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>API Reference &mdash; QNotifications 2.0.5 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Manual" href="main.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> QNotifications
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                2.0.5
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="main.html">Manual</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#module-QNotifications.QNotificationArea">QNotificationArea</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-QNotifications.QNotification">QNotification</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">QNotifications</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>API Reference</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/api.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="api-reference">
+<h1>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-QNotifications.QNotificationArea">
+<span id="qnotificationarea"></span><h2>QNotificationArea<a class="headerlink" href="#module-QNotifications.QNotificationArea" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="QNotifications.QNotificationArea.QNotificationArea">
+<em class="property">class </em><code class="sig-prename descclassname">QNotifications.QNotificationArea.</code><code class="sig-name descname">QNotificationArea</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">targetWidget</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<p>Notification area to show notifications in. Will be projected on top of
+another QWidget which should be passed as an argument to this class.</p>
+<dl class="py method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">targetWidget</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>targetWidget</strong><span class="classifier">QtWidgets.QWidget</span></dt><dd><p>The widget to project the notifications on</p>
+</dd>
+<dt><strong>useGlobalCSS</strong><span class="classifier">bool (default: False)</span></dt><dd><p>Flag which indicates whether global style sheets should be used
+(which have been set at app-level). If False, the default style sheets
+stored at self.default_notification_styles will be loaded.</p>
+</dd>
+<dt><strong>useQueue</strong><span class="classifier">bool (default: True)</span></dt><dd><p>Indicates whether a message queue should be implemented. This will only
+show <em>maxMessages</em> at the same time and will put all other messages in a
+queue. Once a message disappears, the next one in the queue will be shown
+(up to maxMessages at the same time)</p>
+</dd>
+<dt><strong>maxMessages</strong><span class="classifier">int (default: 2)</span></dt><dd><p>The number of messages to display at the same time.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>TypeError</strong><span class="classifier">if targetWidget is not an object that inherits QWidget</span></dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.display">
+<code class="sig-name descname">display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">category</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">5000</span></em>, <em class="sig-param"><span class="n">autohide</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">buttontext</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays a notification.</p>
+<p>If a queue is used, then the notification will only be shown directly
+if the number of notifications shown is smaller than maxMessages.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>message</strong><span class="classifier">str</span></dt><dd><p>The message to display</p>
+</dd>
+<dt><strong>category</strong><span class="classifier">{‘primary’, ‘success’, ‘info’, ‘warning’, ‘danger’}</span></dt><dd><p>The type of notification that should be shown. Adheres to bootstrap
+standards which are primary, success, info, warning and danger</p>
+</dd>
+<dt><strong>timeout</strong><span class="classifier">int, optional</span></dt><dd><p>The duration for which the notification should be shown. If None then
+the notification will be shown indefinitely</p>
+</dd>
+<dt><strong>buttontext</strong><span class="classifier">str, optional</span></dt><dd><p>The text to display on the closing button. If not provided a cross
+will be shown.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ValueError</dt><dd><p>if the category is other than one of the expected values.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.paintEvent">
+<code class="sig-name descname">paintEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">pe</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.paintEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Redefinition of paintEvent.
+Makes class QNotificationArea available in style sheets.
+Internal QT function (do not call directly)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.remove">
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">notification</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>notification</strong><span class="classifier">QNotification (default: None)</span></dt><dd><p>The notification to remove. This function also serves as a PyQt slot
+for signals emitted from a QNotification. In this case, the QNotification
+object is retrieved by using self.sender()</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>ValueError</dt><dd><p>If notification is not None or a QNotification</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.resizeEvent">
+<code class="sig-name descname">resizeEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">event</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.resizeEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.resizeEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Internal QT function (do not call directly).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.setEntryEffect">
+<code class="sig-name descname">setEntryEffect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">effect</span></em>, <em class="sig-param"><span class="n">duration</span><span class="o">=</span><span class="default_value">250</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.setEntryEffect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.setEntryEffect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the effect with which the notifications are to appear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>effect</strong><span class="classifier">{‘fadeIn’, None}</span></dt><dd><p>The effect which should be used (for now only ‘fadeIn’ is available)
+if None is passed for this argument, no effect will be used and the
+notifcations will just appear directly.</p>
+</dd>
+<dt><strong>duration</strong><span class="classifier">int (default: 250 ms)</span></dt><dd><p>The duration of the effect in milliseconds</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>TypeError</dt><dd><p>If the object passed for duration is not an int</p>
+</dd>
+<dt>ValueError</dt><dd><p>When duration is less than 0, or effect has an invalid value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotificationArea.QNotificationArea.setExitEffect">
+<code class="sig-name descname">setExitEffect</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">effect</span></em>, <em class="sig-param"><span class="n">duration</span><span class="o">=</span><span class="default_value">500</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotificationArea.html#QNotificationArea.setExitEffect"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotificationArea.QNotificationArea.setExitEffect" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the effect with which the notifications are to disappear.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>effect</strong><span class="classifier">{‘fadeOut’, None}</span></dt><dd><p>the effect which should be used (for now only ‘fadeOut’ is available)
+if None is passed for this argument, no effect will be used and the
+notifcations will just appear directly.</p>
+</dd>
+<dt><strong>duration</strong><span class="classifier">int (default: 1000 ms)</span></dt><dd><p>The duration of the effect in milliseconds</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>TypeError</dt><dd><p>If the object passed for duration is not an int</p>
+</dd>
+<dt>ValueError</dt><dd><p>When duration is less than 0, or effect has an invalid value</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-QNotifications.QNotification">
+<span id="qnotification"></span><h2>QNotification<a class="headerlink" href="#module-QNotifications.QNotification" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="QNotifications.QNotification.QNotification">
+<em class="property">class </em><code class="sig-prename descclassname">QNotifications.QNotification.</code><code class="sig-name descname">QNotification</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">category</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autohide</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">buttontext</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<p>Class representing a single notification</p>
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.__init__">
+<code class="sig-name descname">__init__</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">message</span></em>, <em class="sig-param"><span class="n">category</span></em>, <em class="sig-param"><span class="n">timeout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">autohide</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">buttontext</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.__init__"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Constructor</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>message</strong><span class="classifier">str</span></dt><dd><p>The message to show</p>
+</dd>
+<dt><strong>category</strong><span class="classifier">{‘primary’, ‘success’, ‘info’, ‘warning’, ‘danger’}</span></dt><dd><p>The type of notification. Adheres to bootstrap standard
+classes which are {primary, success, info, warning, danger}</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.category">
+<em class="property">property </em><code class="sig-name descname">category</code><a class="headerlink" href="#QNotifications.QNotification.QNotification.category" title="Permalink to this definition">¶</a></dt>
+<dd><p>The currently set category of this notification.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.close">
+<code class="sig-name descname">close</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Closes the notification.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="QNotifications.QNotification.QNotification.closeClicked">
+<code class="sig-name descname">closeClicked</code><a class="headerlink" href="#QNotifications.QNotification.QNotification.closeClicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>PyQt signal for click on the notification’s close button.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.display">
+<code class="sig-name descname">display</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.display"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.display" title="Permalink to this definition">¶</a></dt>
+<dd><p>Displays the notification.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.enterEvent">
+<code class="sig-name descname">enterEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">e</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.enterEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.enterEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>When the notification is set to auto-hide, it automatically closes
+when the mouse enters the notifcation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.fadeIn">
+<code class="sig-name descname">fadeIn</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">duration</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.fadeIn"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.fadeIn" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fades in the notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>duration</strong><span class="classifier">int</span></dt><dd><p>The desired duration of the animation</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>TypeError</dt><dd><p>if duration is not an integer</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.fadeOut">
+<code class="sig-name descname">fadeOut</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">finishedCallback</span></em>, <em class="sig-param"><span class="n">duration</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.fadeOut"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.fadeOut" title="Permalink to this definition">¶</a></dt>
+<dd><p>Fades out the notification.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>finishedCallback</strong><span class="classifier">callable</span></dt><dd><p>The function to call after the animation has finished (to for instance
+clean up the notification)</p>
+</dd>
+<dt><strong>duration</strong><span class="classifier">int</span></dt><dd><p>The desired duration of the animation</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Raises</dt>
+<dd class="field-even"><dl class="simple">
+<dt>TypeError</dt><dd><p>if the wrong datatype is specified for any of the parameters.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.message">
+<em class="property">property </em><code class="sig-name descname">message</code><a class="headerlink" href="#QNotifications.QNotification.QNotification.message" title="Permalink to this definition">¶</a></dt>
+<dd><p>The currently set message to display.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.onFadeInFinished">
+<code class="sig-name descname">onFadeInFinished</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.onFadeInFinished"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.onFadeInFinished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Indicates that the fade-in animation is done, so that the
+notification can be interacted withself.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="QNotifications.QNotification.QNotification.paintEvent">
+<code class="sig-name descname">paintEvent</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">self</span></em>, <em class="sig-param"><span class="n">pe</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/QNotifications/QNotification.html#QNotification.paintEvent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#QNotifications.QNotification.QNotification.paintEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>redefinition of paintEvent, do not call directly.
+Makes class QNotification available in style sheets. Interal Qt function.
+Should not be called directly.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="main.html" class="btn btn-neutral float-left" title="Manual" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2016-2020, Daniel Schreij
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

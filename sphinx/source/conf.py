@@ -16,8 +16,6 @@
 import sys
 import os
 
-from recommonmark.parser import CommonMarkParser
-
 # Get the version from QNotifications
 sys.path.insert(0, os.path.abspath("../.."))
 import QNotifications
@@ -39,12 +37,12 @@ import QNotifications
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'numpydoc',
+    'recommonmark',
     'sphinx.ext.autodoc',
     'sphinx.ext.viewcode',
     'sphinx.ext.intersphinx',
     'sphinx.ext.githubpages',
-    'sphinx.ext.autosummary',
-    'numpydoc'
 ]
 
 numpydoc_show_class_members = True
@@ -53,10 +51,6 @@ numpydoc_class_members_toctree = False
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
-
-source_parsers = {
-    '.md': CommonMarkParser,
-}
 
 # The suffix(es) of source filenames.
 # You can specify multiple suffix as a list of string:
@@ -70,7 +64,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'QNotifications'
-copyright = '2016, Daniel Schreij'
+copyright = '2016-2020, Daniel Schreij'
 author = 'Daniel Schreij'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -297,7 +291,7 @@ man_pages = [
 #  dir menu entry, description, category)
 texinfo_documents = [
     (master_doc, 'QNotifications', 'QNotifications Documentation',
-     author, 'QNotifications', 'One line description of project.',
+     author, 'QNotifications', 'Pretty notifications for PyQt',
      'Miscellaneous'),
 ]
 
