@@ -20,6 +20,13 @@ except:
 __author__ = u"Daniel Schreij"
 __license__ = u"GPLv3"
 
+
+CURSOR_MARGIN_TOP = 10
+CURSOR_MARGIN_BOTTOM = 50
+CURSOR_MARGIN_LEFT = 10
+CURSOR_MARGIN_RIGHT = 10
+
+
 class QNotificationArea(QtWidgets.QWidget):
 	""" Notification area to show notifications in. Will be projected on top of
 	another QWidget which should be passed as an argument to this class. """
@@ -245,14 +252,31 @@ class QNotificationArea(QtWidgets.QWidget):
 			self.queue.put(notification)
 		else:
 			self._show_notification(notification)
+			
+	def _cursor_in_area(self):
+		geom = self.geometry()
+		top_left = self.mapToGlobal(geom.topLeft())
+		bottom_right = self.mapToGlobal(geom.bottomRight())
+		geom = QtCore.QRect(top_left, bottom_right)
+		geom.setTop(geom.top() - CURSOR_MARGIN_TOP)
+		geom.setBottom(geom.bottom() + CURSOR_MARGIN_BOTTOM)
+		geom.setLeft(geom.left() - CURSOR_MARGIN_LEFT)
+		geom.setRight(geom.right() + CURSOR_MARGIN_RIGHT)
+		cursor_pos = QtGui.QCursor().pos()
+		return geom.contains(cursor_pos)
 
 	def _show_notification(self, notification):
 		if not self.isVisible():
 			self.show()
 			self.raise_()
-
 		self.layout().addWidget(notification)
-
+		if self._cursor_in_area():
+			self.layout().removeWidget(notification)
+			QtCore.QTimer.singleShot(
+				1000,
+				lambda : self._show_notification(notification)
+			)
+			return
 		# Check for entry effects
 		if not self.entryEffect is None:
 			if self.entryEffect == u"fadeIn":
