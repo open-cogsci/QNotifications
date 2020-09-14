@@ -266,17 +266,16 @@ class QNotificationArea(QtWidgets.QWidget):
 		return geom.contains(cursor_pos)
 
 	def _show_notification(self, notification):
-		if not self.isVisible():
-			self.show()
-			self.raise_()
-		self.layout().addWidget(notification)
 		if self._cursor_in_area():
-			self.layout().removeWidget(notification)
 			QtCore.QTimer.singleShot(
 				1000,
 				lambda : self._show_notification(notification)
 			)
 			return
+		if not self.isVisible():
+			self.show()
+			self.raise_()
+		self.layout().addWidget(notification)
 		# Check for entry effects
 		if not self.entryEffect is None:
 			if self.entryEffect == u"fadeIn":
